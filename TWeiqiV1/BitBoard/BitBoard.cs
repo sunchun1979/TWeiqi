@@ -62,5 +62,36 @@ namespace BitBoard
             retBoard.numGroups = this.numGroups;
             return retBoard;
         }
+
+        public string ToString()
+        {
+            string ret = string.Empty;
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                {
+                    ret += ". ";
+                }
+                ret += "\n";
+            }
+            return ret;
+        }
+
+        private bool Check19(byte[] p, int i, int j)
+        {
+            return Check19(p, GetMove19(i, j));
+        }
+
+        private bool Check19(byte[] p, int move)
+        {
+            // move / 8 defines the byte, move % 8 defines the bit
+            return ((p[move >> 3]) & (1 << (move & 7))) != 0;
+        }
+
+        private static int GetMove19(int i, int j)
+        {
+            // i * 19 + j
+            return (i << 4) + (i << 1) + i + j;
+        }
     }
 }
