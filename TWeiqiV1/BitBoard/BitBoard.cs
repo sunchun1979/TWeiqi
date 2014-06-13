@@ -8,66 +8,65 @@ namespace BitBoardUtils
 {
     public class BitBoard : ICloneable, IEquatable<BitBoard>
     {
-        public const short BADLIBERTY = 400;
-        public const short BLACK = 0;
-        public const short WHITE = 1;
+        public const int BLACK = 0;
+        public const int WHITE = 1;
 
-        private short Size;
-        private short bSize;
+        private int Size;
+        private int bSize;
 
-        private byte[][] stones;
-        private byte[] emptyStones;
-        private byte[][] legalMoves;
-        private byte[] mask;
+        private int[][] stones;
+        private int[] emptyStones;
+        private int[][] legalMoves;
+        private int[] mask;
 
-        private List<short[]>[] groups;
-        private List<short[]>[] liberties;
-        private short[] numGroups;
+        private List<int[]>[] groups;
+        private List<int[]>[] liberties;
+        private int[] numGroups;
 
         public BitBoard() : this(19)
         {
 
         }
 
-        public BitBoard (short size)
+        public BitBoard (int size)
         {
             Size = size;
-            bSize = (short)(Size * Size / 8 + 1);
-            stones = new byte[2][];
-            stones[BLACK] = new byte[bSize];
-            stones[WHITE] = new byte[bSize];
-            emptyStones = new byte[bSize];
-            legalMoves = new byte[2][];
-            legalMoves[BLACK] = new byte[bSize];
-            legalMoves[WHITE] = new byte[bSize];
-            mask = new byte[bSize];
-            groups = new List<short[]>[2];
-            groups[BLACK] = new List<short[]>();
-            groups[WHITE] = new List<short[]>();
-            liberties = new List<short[]>[2];
-            liberties[BLACK] = new List<short[]>();
-            liberties[WHITE] = new List<short[]>();
-            numGroups = new short[2];
+            bSize = (Size * Size / sizeof(int) + 1);
+            stones = new int[2][];
+            stones[BLACK] = new int[bSize];
+            stones[WHITE] = new int[bSize];
+            emptyStones = new int[bSize];
+            legalMoves = new int[2][];
+            legalMoves[BLACK] = new int[bSize];
+            legalMoves[WHITE] = new int[bSize];
+            mask = new int[bSize];
+            groups = new List<int[]>[2];
+            groups[BLACK] = new List<int[]>();
+            groups[WHITE] = new List<int[]>();
+            liberties = new List<int[]>[2];
+            liberties[BLACK] = new List<int[]>();
+            liberties[WHITE] = new List<int[]>();
+            numGroups = new int[2];
         }
 
         public object Clone()
         {
             var retBoard = new BitBoard(Size);
-            retBoard.stones = new byte[2][];
-            retBoard.stones[BLACK] = (byte[])this.stones[BLACK].Clone();
-            retBoard.stones[WHITE] = (byte[])this.stones[WHITE].Clone();
-            retBoard.emptyStones = (byte[])this.emptyStones.Clone();
-            retBoard.legalMoves = new byte[2][];
-            retBoard.legalMoves[BLACK] = (byte[])this.legalMoves[BLACK].Clone();
-            retBoard.legalMoves[WHITE] = (byte[])this.legalMoves[WHITE].Clone();
-            retBoard.mask = (byte[])this.mask.Clone();
-            retBoard.groups = new List<short[]>[2];
-            retBoard.groups[BLACK] = this.groups[BLACK].Select(i => (short[])i.Clone()).ToList();
-            retBoard.groups[WHITE] = this.groups[WHITE].Select(i => (short[])i.Clone()).ToList();
-            retBoard.liberties = new List<short[]>[2];
-            retBoard.liberties[BLACK] = this.liberties[BLACK].Select(i => (short[])i.Clone()).ToList();
-            retBoard.liberties[WHITE] = this.liberties[WHITE].Select(i => (short[])i.Clone()).ToList();
-            retBoard.numGroups = new short[2];
+            retBoard.stones = new int[2][];
+            retBoard.stones[BLACK] = (int[])this.stones[BLACK].Clone();
+            retBoard.stones[WHITE] = (int[])this.stones[WHITE].Clone();
+            retBoard.emptyStones = (int[])this.emptyStones.Clone();
+            retBoard.legalMoves = new int[2][];
+            retBoard.legalMoves[BLACK] = (int[])this.legalMoves[BLACK].Clone();
+            retBoard.legalMoves[WHITE] = (int[])this.legalMoves[WHITE].Clone();
+            retBoard.mask = (int[])this.mask.Clone();
+            retBoard.groups = new List<int[]>[2];
+            retBoard.groups[BLACK] = this.groups[BLACK].Select(i => (int[])i.Clone()).ToList();
+            retBoard.groups[WHITE] = this.groups[WHITE].Select(i => (int[])i.Clone()).ToList();
+            retBoard.liberties = new List<int[]>[2];
+            retBoard.liberties[BLACK] = this.liberties[BLACK].Select(i => (int[])i.Clone()).ToList();
+            retBoard.liberties[WHITE] = this.liberties[WHITE].Select(i => (int[])i.Clone()).ToList();
+            retBoard.numGroups = new int[2];
             retBoard.numGroups[BLACK] = this.numGroups[BLACK];
             retBoard.numGroups[WHITE] = this.numGroups[WHITE];
             return retBoard;
@@ -76,9 +75,9 @@ namespace BitBoardUtils
         public override string ToString()
         {
             string ret = string.Empty;
-            for (short i = 0; i < Size; i++)
+            for (int i = 0; i < Size; i++)
             {
-                for (short j = 0; j < Size; j++)
+                for (int j = 0; j < Size; j++)
                 {
                     if (Check19(stones[BLACK], i, j))
                     {
@@ -122,14 +121,14 @@ namespace BitBoardUtils
                 (Enumerable.SequenceEqual(stones[WHITE], board.stones[WHITE]));
         }
 
-        public bool Move19(short i, short j, short color, List<BitBoard> koCheck = null)
+        public bool Move19(int i, int j, int color, List<BitBoard> koCheck = null)
         {
             return Move19(GetMove19(i, j), color, koCheck);
         }
 
-        public bool Move19(short move, short color, List<BitBoard> koCheck)
+        public bool Move19(int move, int color, List<BitBoard> koCheck)
         {
-            short[] liberty = GetLiberty19(move);
+            int[] liberty = GetLiberty19(move);
             // to change the following two lines
             Set19(stones[color], move);
             Array.ForEach(liberty, x => Set19(stones[1 - color], x));
@@ -137,58 +136,58 @@ namespace BitBoardUtils
         }
 
         // Private Helpers
-        private short[] GetLiberty19(short move)
+        private int[] GetLiberty19(int move)
         {
-            var ret = new List<short>();
+            var ret = new List<int>();
             // top
             if (move >= 19)
             {
-                ret.Add((short)(move - 19));
+                ret.Add(move - 19);
             }
             // bottom
             if (move + 19 <= 361)
             {
-                ret.Add((short)(move + 19));
+                ret.Add(move + 19);
             }
             // left
             if (move % 19 > 0)
             {
-                ret.Add((short)(move - 1));
+                ret.Add(move - 1);
             }
             // right
             if (move % 19 < 18)
             {
-                ret.Add((short)(move + 1));
+                ret.Add(move + 1);
             }
             return ret.ToArray();
         }
 
-        private bool Check19(byte[] p, short i, short j)
+        private bool Check19(int[] p, int i, int j)
         {
             return Check19(p, GetMove19(i, j));
         }
 
-        private bool Check19(byte[] p, short move)
+        private bool Check19(int[] p, int move)
         {
-            // move / 8 defines the byte, move % 8 defines the bit
-            return ((p[move >> 3]) & (1 << (move & 7))) != 0;
+            // move / 16 defines the byte, move % 16 defines the bit
+            return ((p[move >> 4]) & (1 << (move & 15))) != 0;
         }
 
-        private void Set19(byte[] p, short i, short j)
+        private void Set19(int[] p, int i, int j)
         {
             Set19(p, GetMove19(i, j));
         }
 
-        private void Set19(byte[] p, short move)
+        private void Set19(int[] p, int move)
         {
             // move / 8 defines the byte, move % 8 defines the bit
-            (p[move >> 3]) |= (byte)(1 << (move & 7));
+            (p[move >> 4]) |= (1 << (move & 15));
         }
 
-        private static short GetMove19(short i, short j)
+        private static int GetMove19(int i, int j)
         {
             // i * 19 + j
-            return (short)((i << 4) + (i << 1) + i + j);
+            return (i << 4) + (i << 1) + i + j;
         }
     }
 }
