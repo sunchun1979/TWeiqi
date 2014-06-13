@@ -1,0 +1,5 @@
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\BitBoard\bin\Debug\BitBoard.dll
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\BitBoard\bin\Debug\BitBoard.pdb
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\BitBoard\obj\Debug\BitBoard.dll
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\BitBoard\obj\Debug\BitBoard.pdb
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\BitBoard\obj\Debug\BitBoard.csprojResolveAssemblyReference.cache

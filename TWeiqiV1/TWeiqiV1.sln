@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTester", "ConsoleTester\ConsoleTester.csproj", "{C30F5EC0-704E-4F3B-8069-C3E788CDA7AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{455A1C42-02E4-483F-90D7-591FD7CD3D03} = {455A1C42-02E4-483F-90D7-591FD7CD3D03}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitBoard", "BitBoard\BitBoard.csproj", "{455A1C42-02E4-483F-90D7-591FD7CD3D03}"
 EndProject
