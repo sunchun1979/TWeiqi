@@ -7,7 +7,7 @@
     <ProjectGuid>{455A1C42-02E4-483F-90D7-591FD7CD3D03}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BitBoard</RootNamespace>
+    <RootNamespace>BitBoardUtils</RootNamespace>
     <AssemblyName>BitBoard</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitBoard.cs" />
+    <Compile Include="LibertyConst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

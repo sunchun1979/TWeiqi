@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,21 +7,38 @@ using System.Threading.Tasks;
 
 namespace BitBoardUtils
 {
+    public static class BitArrayExtension
+    {
+        // Return the logical And of all of the entries in the array.
+        static public bool AndAll(this BitArray bits)
+        {
+            foreach (bool value in bits) if (!value) return false;
+            return true;
+        }
+
+        // Return the logical Or of all of the entries in the array.
+        static public bool OrAll(this BitArray bits)
+        {
+            foreach (bool value in bits) if (value) return true;
+            return false;
+        }
+    }
+
     public class BitBoard : ICloneable, IEquatable<BitBoard>
     {
+        // int = int32
         public const int BLACK = 0;
         public const int WHITE = 1;
 
         private int Size;
-        private int bSize;
+        private int Size2;
 
-        private int[][] stones;
-        private int[] emptyStones;
-        private int[][] legalMoves;
-        private int[] mask;
+        private BitArray[] stones;
+        private BitArray emptyStones;
+        private BitArray mask;
 
-        private List<int[]>[] groups;
-        private List<int[]>[] liberties;
+        private List<BitArray>[] groups;
+        private List<BitArray>[] liberties;
         private int[] numGroups;
 
         public BitBoard() : this(19)
@@ -31,41 +49,35 @@ namespace BitBoardUtils
         public BitBoard (int size)
         {
             Size = size;
-            bSize = (Size * Size / sizeof(int) + 1);
-            stones = new int[2][];
-            stones[BLACK] = new int[bSize];
-            stones[WHITE] = new int[bSize];
-            emptyStones = new int[bSize];
-            legalMoves = new int[2][];
-            legalMoves[BLACK] = new int[bSize];
-            legalMoves[WHITE] = new int[bSize];
-            mask = new int[bSize];
-            groups = new List<int[]>[2];
-            groups[BLACK] = new List<int[]>();
-            groups[WHITE] = new List<int[]>();
-            liberties = new List<int[]>[2];
-            liberties[BLACK] = new List<int[]>();
-            liberties[WHITE] = new List<int[]>();
+            Size2 = Size * Size;
+            stones = new BitArray[2];
+            stones[BLACK] = new BitArray(Size2);
+            stones[WHITE] = new BitArray(Size2);
+            emptyStones = new BitArray(Size2);
+            mask = new BitArray(Size2);
+            groups = new List<BitArray>[2];
+            groups[BLACK] = new List<BitArray>();
+            groups[WHITE] = new List<BitArray>();
+            liberties = new List<BitArray>[2];
+            liberties[BLACK] = new List<BitArray>();
+            liberties[WHITE] = new List<BitArray>();
             numGroups = new int[2];
         }
 
         public object Clone()
         {
             var retBoard = new BitBoard(Size);
-            retBoard.stones = new int[2][];
-            retBoard.stones[BLACK] = (int[])this.stones[BLACK].Clone();
-            retBoard.stones[WHITE] = (int[])this.stones[WHITE].Clone();
-            retBoard.emptyStones = (int[])this.emptyStones.Clone();
-            retBoard.legalMoves = new int[2][];
-            retBoard.legalMoves[BLACK] = (int[])this.legalMoves[BLACK].Clone();
-            retBoard.legalMoves[WHITE] = (int[])this.legalMoves[WHITE].Clone();
-            retBoard.mask = (int[])this.mask.Clone();
-            retBoard.groups = new List<int[]>[2];
-            retBoard.groups[BLACK] = this.groups[BLACK].Select(i => (int[])i.Clone()).ToList();
-            retBoard.groups[WHITE] = this.groups[WHITE].Select(i => (int[])i.Clone()).ToList();
-            retBoard.liberties = new List<int[]>[2];
-            retBoard.liberties[BLACK] = this.liberties[BLACK].Select(i => (int[])i.Clone()).ToList();
-            retBoard.liberties[WHITE] = this.liberties[WHITE].Select(i => (int[])i.Clone()).ToList();
+            retBoard.stones = new BitArray[2];
+            retBoard.stones[BLACK] = (BitArray)this.stones[BLACK].Clone();
+            retBoard.stones[WHITE] = (BitArray)this.stones[WHITE].Clone();
+            retBoard.emptyStones = (BitArray)this.emptyStones.Clone();
+            retBoard.mask = (BitArray)this.mask.Clone();
+            retBoard.groups = new List<BitArray>[2];
+            retBoard.groups[BLACK] = this.groups[BLACK].Select(i => (BitArray)i.Clone()).ToList();
+            retBoard.groups[WHITE] = this.groups[WHITE].Select(i => (BitArray)i.Clone()).ToList();
+            retBoard.liberties = new List<BitArray>[2];
+            retBoard.liberties[BLACK] = this.liberties[BLACK].Select(i => (BitArray)i.Clone()).ToList();
+            retBoard.liberties[WHITE] = this.liberties[WHITE].Select(i => (BitArray)i.Clone()).ToList();
             retBoard.numGroups = new int[2];
             retBoard.numGroups[BLACK] = this.numGroups[BLACK];
             retBoard.numGroups[WHITE] = this.numGroups[WHITE];
@@ -117,8 +129,8 @@ namespace BitBoardUtils
         public bool Equals(BitBoard board)
         {
             return (Size == board.Size) &&
-                (Enumerable.SequenceEqual(stones[BLACK], board.stones[BLACK])) &&
-                (Enumerable.SequenceEqual(stones[WHITE], board.stones[WHITE]));
+                (stones[BLACK].Equals(board.stones[BLACK])) &&
+                (stones[WHITE].Equals(board.stones[WHITE]));
         }
 
         public bool Move19(int i, int j, int color, List<BitBoard> koCheck = null)
@@ -128,11 +140,51 @@ namespace BitBoardUtils
 
         public bool Move19(int move, int color, List<BitBoard> koCheck)
         {
-            int[] liberty = GetLiberty19(move);
-            // to change the following two lines
-            Set19(stones[color], move);
-            Array.ForEach(liberty, x => Set19(stones[1 - color], x));
+            var liberty = LibertyConst.LibertyMap[move];
+            
+            var group = new BitArray(Size2);
+            Set19(group, move);
+
+            // merge group
+            var newGroups = MergeGroup(groups[color], liberties[color], group);
+            var newStones = MergeStones(groups[color]);
+            // check opponent liberty
+            // check self liberty
+            // update opponent liberty
+            // update self liberty
+            // update group
+            // update legal moves
+            // update board
+
             return true;
+        }
+
+        private BitArray MergeStones(List<BitArray> list)
+        {
+            var ret = (BitArray)list[0].Clone();
+            for (int i = 1; i < list.Count; i++)
+            {
+                ret = ret.Or(list[i]);
+            }
+            return ret;
+        }
+
+        private List<BitArray> MergeGroup(List<BitArray> groupsByColor, List<BitArray> libertiesByColor, BitArray group)
+        {
+            var newGroups = new List<BitArray>();
+            newGroups.Add(group);
+            for (int i = 0; i < groupsByColor.Count; i++)
+            {
+                if (libertiesByColor[i].And(group).OrAll())
+                {
+                    newGroups[0] = newGroups[0].And(groupsByColor[i]);
+                }
+                else
+                {
+                    newGroups.Add(groupsByColor[i]);
+                }
+            }
+            return newGroups;
         }
 
         // Private Helpers
@@ -162,26 +214,26 @@ namespace BitBoardUtils
             return ret.ToArray();
         }
 
-        private bool Check19(int[] p, int i, int j)
+        private bool Check19(BitArray p, int i, int j)
         {
             return Check19(p, GetMove19(i, j));
         }
 
-        private bool Check19(int[] p, int move)
+        private bool Check19(BitArray p, int move)
         {
             // move / 16 defines the byte, move % 16 defines the bit
-            return ((p[move >> 4]) & (1 << (move & 15))) != 0;
+            return p[move];
         }
 
-        private void Set19(int[] p, int i, int j)
+        private void Set19(BitArray p, int i, int j)
         {
             Set19(p, GetMove19(i, j));
         }
 
-        private void Set19(int[] p, int move)
+        private void Set19(BitArray p, int move)
         {
-            // move / 8 defines the byte, move % 8 defines the bit
-            (p[move >> 4]) |= (1 << (move & 15));
+            // move / 16 defines the byte, move % 16 defines the bit
+            p[move] = true;
         }
 
         private static int GetMove19(int i, int j)
@@ -189,5 +241,7 @@ namespace BitBoardUtils
             // i * 19 + j
             return (i << 4) + (i << 1) + i + j;
         }
+
+
     }
 }
