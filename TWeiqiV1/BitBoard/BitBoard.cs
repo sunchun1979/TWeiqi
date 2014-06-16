@@ -22,6 +22,47 @@ namespace BitBoardUtils
             foreach (bool value in bits) if (value) return true;
             return false;
         }
+
+        // Return if the first array is a subset of the second array
+        static public bool SubSetOf(this BitArray bits, BitArray other)
+        {
+            for (int i = 0; i < bits.Length; i++)
+            {
+                if (bits[i])
+                {
+                    if (!other[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Xor with true mask
+        static public void XorTrue(this BitArray bits, BitArray other)
+        {
+            for (int i = 0; i < bits.Length; i++)
+            {
+                if (bits[i])
+                {
+                    bits[i] ^= other[i];
+                }
+            }
+        }
+
+        // Xor with true mask
+        static public void OrTrue(this BitArray bits, BitArray other, BitArray pmask = null)
+        {
+            var mask = (pmask == null) ? bits : pmask;
+            for (int i = 0; i < bits.Length; i++)
+            {
+                if (mask[i])
+                {
+                    bits[i] |= other[i];
+                }
+            }
+        }
     }
 
     public class BitBoard : ICloneable, IEquatable<BitBoard>
@@ -49,11 +90,12 @@ namespace BitBoardUtils
         public BitBoard (int size)
         {
             Size = size;
-            Size2 = Size * Size;
+            Size2 = (Size * Size / 32 + 1) * 32;
             stones = new BitArray[2];
             stones[BLACK] = new BitArray(Size2);
             stones[WHITE] = new BitArray(Size2);
             emptyStones = new BitArray(Size2);
+            emptyStones.SetAll(true);
             mask = new BitArray(Size2);
             groups = new List<BitArray>[2];
             groups[BLACK] = new List<BitArray>();
@@ -89,6 +131,7 @@ namespace BitBoardUtils
             string ret = string.Empty;
             for (int i = 0; i < Size; i++)
             {
+                ret += " ";
                 for (int j = 0; j < Size; j++)
                 {
                     if (Check19(stones[BLACK], i, j))
@@ -135,83 +178,223 @@ namespace BitBoardUtils
 
         public bool Move19(int i, int j, int color, List<BitBoard> koCheck = null)
         {
+            if ( (i==3) && (j==1) )
+            {
+                var str = "str";
+            }
             return Move19(GetMove19(i, j), color, koCheck);
+        }
+
+        public static void PrintValues(BitArray myList)
+        {
+            if (myList == null)
+            {
+                return;
+            }
+            for (int i = 0; i < myList.Length; i++)
+            {
+                if (myList[i])
+                {
+                    Console.Write(i + " ");
+                }
+            }
+            Console.WriteLine();
         }
 
         public bool Move19(int move, int color, List<BitBoard> koCheck)
         {
-            var liberty = LibertyConst.LibertyMap[move];
+            if (!emptyStones[move])
+            {
+                return false;
+            }
+            //var liberty = LibertyConst.LibertyMap[move].And(emptyStones);
+            var liberty = GetLiberty19(move).And(emptyStones);
             
             var group = new BitArray(Size2);
             Set19(group, move);
 
+
             // merge group
-            var newGroups = MergeGroup(groups[color], liberties[color], group);
-            var newStones = MergeStones(groups[color]);
+            var newResult = MergeGroup(groups[color], liberties[color], group, liberty);
+            var newGroups = newResult.Item1;
+            var newLiberties = newResult.Item2;
+            var newStones = newResult.Item3;
             // check opponent liberty
+            var captured = CheckCapture(liberties[1 - color], newStones);
             // check self liberty
+            BitArray capturedStones = null;
+            if (captured == null)
+            {
+                var selfCapture = CheckCapture(newLiberties, stones[1 - color]);
+                if (selfCapture != null)
+                {
+                    //Console.WriteLine("illegal2 " + move);
+                    //for (int c = 0; c < 2; c++)
+                    //{
+                    //    Console.WriteLine("color = " + c);
+                    //    for (int i = 0; i < groups[c].Count; i++)
+                    //    {
+                    //        PrintValues(groups[c][i]);
+                    //        PrintValues(liberties[c][i]);
+                    //    }
+                    //}
+                    //Console.WriteLine("current color: " + color);
+                    //for (int i = 0; i < newGroups.Count; i++)
+                    //{
+                    //    PrintValues(newGroups[i]);
+                    //    PrintValues(newLiberties[i]);
+                    //}
+                    //Console.ReadLine();
+                    return false;
+                }
+            }   
+                // capture
+            else
+            {
+                capturedStones = new BitArray(Size2);
+                foreach (var item in captured)
+                {
+                    capturedStones.Or(groups[1 - color][item]);
+                    stones[1 - color] = stones[1 - color].Xor(groups[1 - color][item]);
+                    groups[1 - color].RemoveAt(item);
+                    liberties[1 - color].RemoveAt(item);
+                }
+            }
             // update opponent liberty
+            for (int i = 0; i < liberties[1 - color].Count; i++)
+            {
+                liberties[1 - color][i].XorTrue(group);
+            }
             // update self liberty
+            liberties[color] = newLiberties;
             // update group
-            // update legal moves
+            groups[color] = newGroups;
             // update board
+            stones[color] = (BitArray)newStones.Clone();
+            emptyStones.Xor(group);
+
+            if (captured != null)
+            {
+                RecalculateLiberty(capturedStones);
+            }
+
+            //for (int c = 0; c < 2; c++)
+            //{
+            //    Console.WriteLine("color = " + c);
+            //    for (int i = 0; i < groups[c].Count; i++)
+            //    {
+            //        PrintValues(groups[c][i]);
+            //        PrintValues(liberties[c][i]);
+            //    }
+            //}
 
             return true;
         }
 
-        private BitArray MergeStones(List<BitArray> list)
+        private void RecalculateLiberty(BitArray capturedStones)
         {
-            var ret = (BitArray)list[0].Clone();
-            for (int i = 1; i < list.Count; i++)
+            var captureLiberty = new BitArray(Size2);
+            for (int j = 0; j < capturedStones.Length; j++)
             {
-                ret = ret.Or(list[i]);
+                if (capturedStones[j])
+                {
+                    captureLiberty.Or(GetLiberty19(j));
+                }
             }
-            return ret;
+            for (int c = 0; c < 2; c++)
+            {
+                for (int i = 0; i < groups[c].Count; i++)
+                {
+                    if (((BitArray)groups[c][i].Clone()).And(captureLiberty).OrAll())
+                    {
+                        var newLiberty = new BitArray(Size2);
+                        for (int j = 0; j < groups[c][i].Length; j++)
+                        {
+                            if (groups[c][i][j])
+                            {
+                                newLiberty.Or(GetLiberty19(j));
+                            }
+                        }
+                        newLiberty.XorTrue(stones[1 - c]);
+                        newLiberty.XorTrue(stones[c]);
+                        liberties[c][i] = (BitArray)newLiberty.Clone();
+                    }
+                }
+            }
         }
 
-        private List<BitArray> MergeGroup(List<BitArray> groupsByColor, List<BitArray> libertiesByColor, BitArray group)
+        private List<int> CheckCapture(List<BitArray> libertyCandidate, BitArray opponentStones)
+        {
+            var captured = new List<int>();
+            bool ret = false;
+            for (int i = 0; i < libertyCandidate.Count; i++)
+            {
+                if (libertyCandidate[i].SubSetOf(opponentStones))
+                {
+                    captured.Add(i);
+                    ret = true;
+                }
+            }
+            if (ret)
+            {
+                return captured;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private Tuple<List<BitArray>, List<BitArray>, BitArray> MergeGroup(List<BitArray> groupsByColor, List<BitArray> libertiesByColor, BitArray group, BitArray liberty)
         {
             var newGroups = new List<BitArray>();
-            newGroups.Add(group);
+            newGroups.Add((BitArray)group.Clone());
+            var newLiberties = new List<BitArray>();
+            newLiberties.Add((BitArray)liberty.Clone());
+            var newStones = (BitArray)group.Clone();
             for (int i = 0; i < groupsByColor.Count; i++)
             {
-                if (libertiesByColor[i].And(group).OrAll())
+                if(((BitArray)group.Clone()).And(libertiesByColor[i]).OrAll())
                 {
-                    newGroups[0] = newGroups[0].And(groupsByColor[i]);
+                    newGroups[0].Or(groupsByColor[i]);
+                    newLiberties[0].Or(libertiesByColor[i]);
                 }
                 else
                 {
-                    newGroups.Add(groupsByColor[i]);
+                    newGroups.Add((BitArray)groupsByColor[i].Clone());
+                    newLiberties.Add((BitArray)libertiesByColor[i].Clone());
                 }
+                newStones.Or(groupsByColor[i]);
             }
-            return newGroups;
+            newLiberties[0].XorTrue(newStones);
+            return new Tuple<List<BitArray>,List<BitArray>,BitArray>(newGroups, newLiberties, newStones);
         }
 
         // Private Helpers
-        private int[] GetLiberty19(int move)
+        private BitArray GetLiberty19(int move)
         {
-            var ret = new List<int>();
+            var ret = new BitArray(Size2);
             // top
-            if (move >= 19)
+            if (move >= Size)
             {
-                ret.Add(move - 19);
+                Set19(ret, move - Size);
             }
             // bottom
-            if (move + 19 <= 361)
+            if (move + Size < Size*Size)
             {
-                ret.Add(move + 19);
+                Set19(ret, move + Size);
             }
             // left
-            if (move % 19 > 0)
+            if (move % Size > 0)
             {
-                ret.Add(move - 1);
+                Set19(ret, move - 1);
             }
             // right
-            if (move % 19 < 18)
+            if (move % Size < Size - 1)
             {
-                ret.Add(move + 1);
+                Set19(ret, move + 1);
             }
-            return ret.ToArray();
+            return ret;
         }
 
         private bool Check19(BitArray p, int i, int j)
@@ -236,12 +419,10 @@ namespace BitBoardUtils
             p[move] = true;
         }
 
-        private static int GetMove19(int i, int j)
+        private int GetMove19(int i, int j)
         {
             // i * 19 + j
-            return (i << 4) + (i << 1) + i + j;
+            return i * Size + j;
         }
-
-
     }
 }
