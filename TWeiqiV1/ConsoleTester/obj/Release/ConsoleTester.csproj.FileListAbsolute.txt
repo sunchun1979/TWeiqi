@@ -1,0 +1,8 @@
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\bin\Release\ConsoleTester.exe.config
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\bin\Release\ConsoleTester.exe
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\bin\Release\ConsoleTester.pdb
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\bin\Release\BitBoard.dll
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\bin\Release\BitBoard.pdb
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\obj\Release\ConsoleTester.csprojResolveAssemblyReference.cache
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\obj\Release\ConsoleTester.exe
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV1\ConsoleTester\obj\Release\ConsoleTester.pdb
