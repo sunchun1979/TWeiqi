@@ -27,12 +27,12 @@
     <ClInclude Include="BitBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BitArray19.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BitBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
