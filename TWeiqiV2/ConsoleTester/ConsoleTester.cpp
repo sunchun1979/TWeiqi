@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 
-BitBoard<BitArray19> OneGame()
+void OneGame(bool print)
 {
 	BitBoard<BitArray19> board(19);
 	int totalMove = 200;
@@ -21,22 +21,25 @@ BitBoard<BitArray19> OneGame()
 		}
 		c = 1 - c;
 	}
-	return board;
+	if (print)
+	{
+		cout << board.ToString() << endl;
+	}
 }
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	getchar();
 	srand(1);
-	BitBoard<BitArray19> board(19);
 	std::clock_t start;
 	start = std::clock();
-	for (int i = 0; i < 2000; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		cout << i << endl;
-		board = OneGame();
+		OneGame(false);
 	}
-	cout << board.ToString() << endl;
+	OneGame(true);
 	std::clock_t end = std::clock();
 	std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
 	return 0;

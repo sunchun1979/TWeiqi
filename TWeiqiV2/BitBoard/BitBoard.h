@@ -188,7 +188,10 @@ public:
 
 		for (auto it = m_groups[1-color].begin(); it != m_groups[1-color].end(); ++it)
 		{
-			(*it)->liberty.XorTrue(newMove.stones);
+			if ((*it)->liberty.Intersects(newMove.stones))
+			{
+				(*it)->liberty.XorTrue(newMove.stones);
+			}
 		}
 
 		// Debug
@@ -274,17 +277,14 @@ private:
 
 	bool CheckCapture(TBitGroup& liberty, TBitArray& stones)
 	{
-		TBitArray temp;
-		temp = liberty.liberty;
-		//cout << temp.ToPositionString() << endl;
-		//cout << stones.ToPositionString() << endl;
-		temp.XorTrue(stones);
-		//cout << temp.ToPositionString() << endl;
-		if (temp.HasTrue())
+		if (liberty.liberty.Intersects(stones))
 		{
-			return false;
+			if (liberty.liberty.XorTrueCheck(stones))
+				return false;
+			else
+				return true;
 		}
-		return true;
+		return false;
 	}
 
 	int GetMove(int i, int j)

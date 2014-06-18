@@ -112,12 +112,36 @@ public:
 		}
 	}
 
+	bool Intersects(const BitArrayBase& other)
+	{
+		for (int i = 0; i < m_intLength; i++)
+		{
+			if ((m_bits[i] & other.m_bits[i]) != 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void XorTrue(const BitArrayBase& other)
 	{
 		for (int i = 0; i < m_intLength; i++)
 		{
 			m_bits[i] &= ( m_bits[i] ^ other.m_bits[i]);
 		}
+	}
+
+	bool XorTrueCheck(const BitArrayBase& other)
+	{
+		for (int i = 0; i < m_intLength; i++)
+		{
+			if ((m_bits[i] & ( m_bits[i] ^ other.m_bits[i])) != 0)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void Set1(int index)
