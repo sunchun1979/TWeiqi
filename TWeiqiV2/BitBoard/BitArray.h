@@ -11,12 +11,12 @@ class BitArrayBase
 {
 private:
 	BitArrayBase();
-
 protected:
 
 	int m_bitLength;
 	int m_intLength;
 	int m_lastIntMask;
+	int m_bitIntDiff;
 
 	int *m_bits;
 
@@ -27,7 +27,8 @@ public:
 		m_bits(bitMem)
 	{
 		memset(m_bits, 0, m_intLength * sizeof(int));
-		m_lastIntMask = (0xFFFFFFFF << (m_bitLength & 31));
+		m_bitIntDiff = m_intLength * sizeof(int) * 8 - m_bitLength;
+		m_lastIntMask = (0xFFFFFFFF >> m_bitIntDiff);
 	}
 
 	~BitArrayBase(void)
@@ -44,6 +45,29 @@ public:
 		for (int i = 0; i < m_intLength; i++)
 		{
 			ss << " " << m_bits[i];
+		}
+		return ss.str();
+	}
+
+	string ToBinaryString()
+	{
+		stringstream ss;
+		for (int i = 0; i < m_intLength; i++)
+		{
+			ss << bitset<32>(m_bits[i]);
+		}
+		return ss.str();
+	}
+
+	string ToPositionString()
+	{
+		stringstream ss;
+		for (int i = 0; i < m_bitLength; i++)
+		{
+			if (Get(i))
+			{
+				ss << i << " ";
+			}
 		}
 		return ss.str();
 	}
@@ -85,6 +109,14 @@ public:
 		for (int i = 0; i < m_intLength; i++)
 		{
 			m_bits[i] ^= other.m_bits[i];
+		}
+	}
+
+	void XorTrue(const BitArrayBase& other)
+	{
+		for (int i = 0; i < m_intLength; i++)
+		{
+			m_bits[i] &= ( m_bits[i] ^ other.m_bits[i]);
 		}
 	}
 
@@ -130,6 +162,21 @@ public:
 			}
 		}
 		return (((~m_bits[m_intLength - 1]) & m_lastIntMask) != 0);
+	}
+
+	int GetNumEmptyPositions()
+	{
+		int ret = 0;
+		for (int i = 0; i < m_intLength; i++)
+		{
+			int c;
+			int v = m_bits[i];
+			v = v - ((v >> 1) & 0x55555555);                    // reuse input as temporary
+			v = (v & 0x33333333) + ((v >> 2) & 0x33333333);     // temp
+			c = ((v + (v >> 4) & 0xF0F0F0F) * 0x1010101) >> 24; // count
+			ret += c;
+		}
+		return ret - m_bitIntDiff;
 	}
 };
 
@@ -222,6 +269,53 @@ public:
 	}
 
 	bool operator == (const BitArray9& other)
+	{
+		return memcmp(m_bits, other.m_bits, m_intLength) == 0;
+	}
+};
+
+class BitArray5 : public BitArrayBase
+{
+private:
+	int m_myBits[1];
+
+public:
+	BitArray5() : BitArrayBase(25, 1, m_myBits)
+	{
+	}
+	~BitArray5()
+	{
+	}
+
+	BitArray5(const BitArray5& other) : BitArrayBase(other)
+	{
+		*this = other;
+	}
+
+	BitArray5& operator = (const BitArray5& other)
+	{
+		BitArrayBase::operator=(other);
+		memcpy(m_myBits, other.m_myBits, sizeof(int)*1);
+		m_bits = m_myBits;
+		return *this;
+	}
+
+	void operator &= (const BitArray5& other)
+	{
+		BitArrayBase::operator&=(other);
+	}
+
+	void operator |= (const BitArray5& other)
+	{
+		BitArrayBase::operator|=(other);
+	}
+
+	void operator ^= (const BitArray5& other)
+	{
+		BitArrayBase::operator^=(other);
+	}
+
+	bool operator == (const BitArray5& other)
 	{
 		return memcmp(m_bits, other.m_bits, m_intLength) == 0;
 	}

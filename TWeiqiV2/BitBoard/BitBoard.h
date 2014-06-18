@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <list>
+#include <vector>
 
 #include "BitArray.h"
 #include "Constants.h"
@@ -10,15 +11,24 @@ using namespace std;
 template<class TBitArray>
 class BitBoard
 {
+	struct TBitGroup
+	{
+		TBitArray stones;
+		TBitArray liberty;
+	};
+
+	typedef typename list<TBitGroup*>::iterator Titer;
+	typedef typename list<TBitGroup*>::const_iterator TCiter;
+
 protected:
 
 	int m_Size;
 	TBitArray* m_stones[2];
 	TBitArray* m_emptyStones;
-	list<TBitArray*> m_groups[2];
-	list<TBitArray*> m_liberties[2];
+	list<TBitGroup*> m_groups[2];
 
 private:
+
 	BitBoard();
 
 public:
@@ -45,16 +55,11 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			delete m_stones[c];
-			for(list<TBitArray*>::iterator it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
+			for(Titer it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
 			{
 				delete *it;
 			}
 			m_groups[c].clear();
-			for(list<TBitArray*>::iterator it = m_liberties[c].begin(); it != m_liberties[c].end(); ++it)
-			{
-				delete *it;
-			}
-			m_liberties[c].clear();
 		}
 		delete m_emptyStones;
 	}
@@ -65,13 +70,9 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			m_stones[c] = new TBitArray(*other.m_stones[c]);
-			for(list<TBitArray*>::const_iterator it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
+			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
 			{
-				m_groups[c].push_back(new TBitArray(*(*it)));
-			}
-			for(list<TBitArray*>::const_iterator it = other.m_liberties[c].begin(); it != other.m_liberties[c].end(); ++it)
-			{
-				m_liberties[c].push_back(new TBitArray(*(*it)));
+				m_groups[c].push_back(new TBitGroup(*(*it)));
 			}
 		}
 		m_emptyStones = new TBitArray(*other.m_emptyStones);
@@ -120,23 +121,186 @@ public:
 		{
 			return false;
 		}
-		TBitArray liberty;
-		GetLiberty(&liberty, move);
-		TBitArray current;
-		current.Set1(move);
+		TBitGroup newMove;
+		newMove.stones.Set1(move);
+		newMove.liberty.SetAll(false);
+		GetLiberty(&newMove.liberty, move);
+
+		TBitGroup* newMerged = new TBitGroup();
+		list<Titer> oldGroups;
+		bool hasMerged = Merge(*newMerged, oldGroups, m_groups[color], newMove);
+		newMerged->liberty &= *m_emptyStones;
+		list<Titer> capturedStones, selfCapture;
+		bool hasCaptured = CheckCapture(capturedStones, m_groups[1-color], newMerged->stones);
+		if (!hasCaptured)
+		{
+			if (CheckCapture(*newMerged, *m_stones[1-color]))
+			{
+				//cout << "self capture" << endl;
+				//cout << newMerged->stones.ToPositionString() << endl;
+				//cout << newMerged->liberty.ToPositionString() << endl;
+				//cout << m_stones[1-color]->ToPositionString() << endl;
+				//cout << "end self capture" << endl;
+				//getchar();
+				//CheckCapture(*newMerged, *m_stones[1-color]);
+				return false;
+			}
+		
+		}
+
+		if (hasMerged)
+		{
+			for (list<Titer>::iterator it = oldGroups.begin(); it != oldGroups.end(); ++it)
+			{
+				delete *(*it);
+				m_groups[color].erase(*it);
+			}
+		}
+
+		m_groups[color].push_back(newMerged);
+		*m_stones[color] |= newMerged->stones;
+		*m_emptyStones ^= newMove.stones;
+
+		if (hasCaptured)
+		{
+			TBitArray capturedStonesAll;
+			TBitArray capturedNeighbors;
+			for (auto it = capturedStones.begin(); it != capturedStones.end(); ++it)
+			{
+				capturedStonesAll |= (*(*it))->stones;
+				AddLiberty(capturedNeighbors, (*(*it))->stones);
+				*m_stones[1-color] ^= ((*(*it))->stones);
+				m_groups[1-color].erase(*it);
+			}
+			*m_emptyStones |= capturedStonesAll;
+			for (auto it = m_groups[color].begin(); it != m_groups[color].end(); ++it)
+			{
+				TBitArray temp = (*it)->stones;
+				temp &= capturedNeighbors;
+				if (temp.HasTrue())
+				{
+					(*it)->liberty.SetAll(false);
+					AddLiberty((*it)->liberty, (*it)->stones);
+					(*it)->liberty &= (*m_emptyStones);
+				}
+			}
+		}
+
+		for (auto it = m_groups[1-color].begin(); it != m_groups[1-color].end(); ++it)
+		{
+			(*it)->liberty.XorTrue(newMove.stones);
+		}
+
+		// Debug
+		/*
+		cout << "====" << endl;
+		for (int c = 0; c < 2; c++)
+		{
+			cout << "color = " << c << endl;
+			cout << m_stones[c]->ToPositionString() << endl;
+			for (auto it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
+			{
+				cout << "stone " << (*it)->stones.ToPositionString() << endl;
+				cout << "liberty " << (*it)->liberty.ToPositionString() << endl;
+			}
+			cout << endl;
+		}
+		*/
 
 		return true;
 	}
 
-private:
-	
-	void Merge(TBitArray& group)
+	int GetNumEmptyPositions()
 	{
+		return m_emptyStones->GetNumEmptyPositions();
+	}
+
+	int GetMoveByIndex(int n)
+	{
+		for (int i = 0; i < m_Size * m_Size; i++)
+		{
+			if (m_emptyStones->Get(i))
+			{
+				n--;
+				if (n == -1)
+				{
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+
+private:
+
+	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups, const TBitGroup& newMove)
+	{
+		//cout << "merging .." << endl;
+		TBitArray temp;
+		newMerged = newMove;
+		//cout << "newMerged = " << newMerged.stones.ToPositionString() << " | " << newMerged.liberty.ToPositionString() << endl;
+		for(auto it = groups.begin(); it != groups.end(); ++it)
+		{
+			temp = newMove.stones;
+			temp &= (*it)->liberty;
+			//cout << temp.ToBinaryString() << endl;
+			if (temp.HasTrue())
+			{
+				//cout << "interior newMerged = " << newMerged.stones.ToPositionString() << " | " << newMerged.liberty.ToPositionString() << endl;
+				oldGroups.push_back(it);
+				newMerged.stones |= (*it)->stones;
+				(*it)->liberty.XorTrue(newMove.stones);
+				newMerged.liberty |= (*it)->liberty;
+			}
+		}
+		//cout << "newMerged = " << newMerged.stones.ToPositionString() << " | " << newMerged.liberty.ToPositionString() << endl;
+		//cout << "merging end.." << endl;
+		return (oldGroups.size() > 0);
+	}
+
+	bool CheckCapture(list<Titer>& capturedGroups, list<TBitGroup*>& liberties, TBitArray& stones)
+	{
+		bool ret = false;
+		for (auto it = liberties.begin(); it != liberties.end(); ++it)
+		{
+			if (CheckCapture(*(*it), stones))
+			{
+				ret = true;
+				capturedGroups.push_back(it);
+			}
+		}
+		return ret;
+	}
+
+	bool CheckCapture(TBitGroup& liberty, TBitArray& stones)
+	{
+		TBitArray temp;
+		temp = liberty.liberty;
+		//cout << temp.ToPositionString() << endl;
+		//cout << stones.ToPositionString() << endl;
+		temp.XorTrue(stones);
+		//cout << temp.ToPositionString() << endl;
+		if (temp.HasTrue())
+		{
+			return false;
+		}
+		return true;
 	}
 
 	int GetMove(int i, int j)
 	{
 		return i*m_Size + j;
+	}
+
+	void AddLiberty(TBitArray& liberty, TBitArray& stones)
+	{
+		for (int i = 0; i < m_Size * m_Size; i++)
+		{
+			if (stones.Get(i))
+			{
+				GetLiberty(&liberty, i);
+			}
+		}
 	}
 
 	void GetLiberty(TBitArray* liberty, int move)
@@ -146,7 +310,6 @@ private:
 
 	void GetLibertyGeneric(TBitArray* liberty, int move)
 	{
-		liberty->SetAll(false);
 		if (move >= m_Size)
 		{
 			liberty->Set1(move - m_Size);
