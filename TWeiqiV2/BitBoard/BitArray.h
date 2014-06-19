@@ -90,7 +90,7 @@ public:
 
 	void operator &= (const BitArrayBase& other)
 	{
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			m_bits[i] &= other.m_bits[i];
 		}
@@ -98,7 +98,7 @@ public:
 
 	void operator |= (const BitArrayBase& other)
 	{
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			m_bits[i] |= other.m_bits[i];
 		}
@@ -106,7 +106,7 @@ public:
 
 	void operator ^= (const BitArrayBase& other)
 	{
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			m_bits[i] ^= other.m_bits[i];
 		}
@@ -114,7 +114,7 @@ public:
 
 	bool Intersects(const BitArrayBase& other)
 	{
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			if ((m_bits[i] & other.m_bits[i]) != 0)
 			{
@@ -126,7 +126,7 @@ public:
 
 	void XorTrue(const BitArrayBase& other)
 	{
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			m_bits[i] &= ( m_bits[i] ^ other.m_bits[i]);
 		}
@@ -134,7 +134,7 @@ public:
 
 	bool XorTrueCheck(const BitArrayBase& other)
 	{
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			if ((m_bits[i] & ( m_bits[i] ^ other.m_bits[i])) != 0)
 			{
@@ -166,7 +166,7 @@ public:
 
 	bool HasTrue()
 	{
-		for (int i = 0; i < m_intLength - 1; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			if (m_bits[i] != 0)
 			{
@@ -178,7 +178,7 @@ public:
 
 	bool HasFalse()
 	{
-		for (int i = 0; i < m_intLength - 1; i++)
+		for (int i = m_intLength; i-- > 0;)
 		{
 			if (m_bits[i] != 0xFFFFFFFF)
 			{

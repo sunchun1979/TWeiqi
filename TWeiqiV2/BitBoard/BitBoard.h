@@ -129,24 +129,16 @@ public:
 		TBitGroup* newMerged = new TBitGroup();
 		list<Titer> oldGroups;
 		bool hasMerged = Merge(*newMerged, oldGroups, m_groups[color], newMove);
-		newMerged->liberty &= *m_emptyStones;
 		list<Titer> capturedStones, selfCapture;
 		bool hasCaptured = CheckCapture(capturedStones, m_groups[1-color], newMerged->stones);
 		if (!hasCaptured)
 		{
-			if (CheckCapture(*newMerged, *m_stones[1-color]))
+			if (CheckCaptureEach(*newMerged, *m_stones[1-color]))
 			{
-				//cout << "self capture" << endl;
-				//cout << newMerged->stones.ToPositionString() << endl;
-				//cout << newMerged->liberty.ToPositionString() << endl;
-				//cout << m_stones[1-color]->ToPositionString() << endl;
-				//cout << "end self capture" << endl;
-				//getchar();
-				//CheckCapture(*newMerged, *m_stones[1-color]);
 				return false;
 			}
-		
 		}
+		newMerged->liberty &= *m_emptyStones;
 
 		if (hasMerged)
 		{
@@ -175,9 +167,7 @@ public:
 			*m_emptyStones |= capturedStonesAll;
 			for (auto it = m_groups[color].begin(); it != m_groups[color].end(); ++it)
 			{
-				TBitArray temp = (*it)->stones;
-				temp &= capturedNeighbors;
-				if (temp.HasTrue())
+				if (capturedNeighbors.Intersects((*it)->stones))
 				{
 					(*it)->liberty.SetAll(false);
 					AddLiberty((*it)->liberty, (*it)->stones);
@@ -188,7 +178,7 @@ public:
 
 		for (auto it = m_groups[1-color].begin(); it != m_groups[1-color].end(); ++it)
 		{
-			if ((*it)->liberty.Intersects(newMove.stones))
+			if (newMove.stones.Intersects((*it)->liberty))
 			{
 				(*it)->liberty.XorTrue(newMove.stones);
 			}
@@ -209,7 +199,6 @@ public:
 			cout << endl;
 		}
 		*/
-
 		return true;
 	}
 
@@ -236,28 +225,19 @@ public:
 
 private:
 
-	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups, const TBitGroup& newMove)
+	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups, TBitGroup& newMove)
 	{
-		//cout << "merging .." << endl;
-		TBitArray temp;
 		newMerged = newMove;
-		//cout << "newMerged = " << newMerged.stones.ToPositionString() << " | " << newMerged.liberty.ToPositionString() << endl;
 		for(auto it = groups.begin(); it != groups.end(); ++it)
 		{
-			temp = newMove.stones;
-			temp &= (*it)->liberty;
-			//cout << temp.ToBinaryString() << endl;
-			if (temp.HasTrue())
+			if (newMove.stones.Intersects((*it)->liberty))
 			{
-				//cout << "interior newMerged = " << newMerged.stones.ToPositionString() << " | " << newMerged.liberty.ToPositionString() << endl;
 				oldGroups.push_back(it);
 				newMerged.stones |= (*it)->stones;
 				(*it)->liberty.XorTrue(newMove.stones);
 				newMerged.liberty |= (*it)->liberty;
 			}
 		}
-		//cout << "newMerged = " << newMerged.stones.ToPositionString() << " | " << newMerged.liberty.ToPositionString() << endl;
-		//cout << "merging end.." << endl;
 		return (oldGroups.size() > 0);
 	}
 
@@ -266,7 +246,7 @@ private:
 		bool ret = false;
 		for (auto it = liberties.begin(); it != liberties.end(); ++it)
 		{
-			if (CheckCapture(*(*it), stones))
+			if (CheckCaptureEach(*(*it), stones))
 			{
 				ret = true;
 				capturedGroups.push_back(it);
@@ -275,9 +255,9 @@ private:
 		return ret;
 	}
 
-	bool CheckCapture(TBitGroup& liberty, TBitArray& stones)
+	bool CheckCaptureEach(TBitGroup& liberty, TBitArray& stones)
 	{
-		if (liberty.liberty.Intersects(stones))
+		if (stones.Intersects(liberty.liberty))
 		{
 			if (liberty.liberty.XorTrueCheck(stones))
 				return false;
