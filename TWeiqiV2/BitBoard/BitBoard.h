@@ -207,23 +207,24 @@ public:
 
 	int GetNumEmptyPositions()
 	{
-		return m_emptyStones->GetNumEmptyPositions();
+		return m_emptyStones->GetNumOfOnes();
 	}
 
 	int GetMoveByIndex(int n)
 	{
-		for (int i = 0; i < m_Size * m_Size; i++)
-		{
-			if (m_emptyStones->Get(i))
-			{
-				n--;
-				if (n == -1)
-				{
-					return i;
-				}
-			}
-		}
-		return -1;
+		return m_emptyStones->GetNthOne(n);
+		//for (int i = 0; i < m_Size * m_Size; i++)
+		//{
+		//	if (m_emptyStones->Get(i))
+		//	{
+		//		n--;
+		//		if (n == -1)
+		//		{
+		//			return i;
+		//		}
+		//	}
+		//}
+		//return -1;
 	}
 
 private:

@@ -188,13 +188,21 @@ public:
 		return (((~m_bits[m_intLength - 1]) & m_lastIntMask) != 0);
 	}
 
-	int GetNumEmptyPositions()
+	int GetNumOfOnes()
 	{
 		int ret = 0;
-		for (int i = 0; i < m_intLength; i++)
+		for (int i = 0; i < m_intLength - 1; i++)
 		{
 			int c;
 			int v = m_bits[i];
+			v = v - ((v >> 1) & 0x55555555);                    // reuse input as temporary
+			v = (v & 0x33333333) + ((v >> 2) & 0x33333333);     // temp
+			c = ((v + (v >> 4) & 0xF0F0F0F) * 0x1010101) >> 24; // count
+			ret += c;
+		}
+		{
+			int c;
+			int v = m_bits[m_intLength-1];// & m_lastIntMask;
 			v = v - ((v >> 1) & 0x55555555);                    // reuse input as temporary
 			v = (v & 0x33333333) + ((v >> 2) & 0x33333333);     // temp
 			c = ((v + (v >> 4) & 0xF0F0F0F) * 0x1010101) >> 24; // count

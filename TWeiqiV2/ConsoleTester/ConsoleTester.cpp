@@ -11,7 +11,7 @@ int trial = 0;
 
 void OneGame(bool print)
 {
-	BitBoard<BitArray, 19> board(19);
+	BitBoard<BitArray64, 19> board(19);
 	int totalMove = 200;
 	int c = BLACK;
 	for (int i = 0; i < totalMove; i++)
@@ -44,8 +44,26 @@ void ManualGame9()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	ManualGame9();
+	//BitArray64<19> b;
+	//b.Set1(100);
+	//b.Set1(200);
+	//b.Set1(123);
+	//cout << b.ToPositionString() << endl;
+	//cout << "n = " << b.GetNumOfOnes() << endl;
+	//cout << "move = " << b.GetNthOne(0) << endl;
+	//cout << "move = " << b.GetNthOne(1) << endl;
+	//cout << "move = " << b.GetNthOne(2) << endl;
+
+	////uint64_t test = 0;
+	////test |= (1i64 << 17);
+	////test |= (1i64 << 60);
+	////test |= (1i64 << 37);
+	////cout << bitset<64>(test) << endl;
+	////cout << BitArray64Base::GetNthOneEach(test, 1) << endl;
+	////cout << BitArray64Base::GetNthOneEach(test, 2) << endl;
+	////cout << BitArray64Base::GetNthOneEach(test, 3) << endl;
 	getchar();
-	srand(1);
+	srand(10);
 	std::clock_t start;
 	start = std::clock();
 	for (int i = 0; i < 10000; i++)
