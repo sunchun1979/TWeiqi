@@ -1,20 +1,23 @@
+#pragma once
 #include <stdio.h>
 #include <iostream>
 #include <list>
 #include <vector>
 
 #include "BitArray.h"
+#include "BitArray64.h"
 #include "Constants.h"
 
 using namespace std;
 
-template<class TBitArray>
+//template<typename TBitArray<N>>
+template <template<int N> class TBitArray, int N>
 class BitBoard
 {
 	struct TBitGroup
 	{
-		TBitArray stones;
-		TBitArray liberty;
+		TBitArray<N> stones;
+		TBitArray<N> liberty;
 	};
 
 	typedef typename list<TBitGroup*>::iterator Titer;
@@ -23,8 +26,8 @@ class BitBoard
 protected:
 
 	int m_Size;
-	TBitArray* m_stones[2];
-	TBitArray* m_emptyStones;
+	TBitArray<N>* m_stones[2];
+	TBitArray<N>* m_emptyStones;
 	list<TBitGroup*> m_groups[2];
 
 private:
@@ -38,10 +41,10 @@ public:
 		m_Size = size;
 		for (int c = 0; c < 2; c++)
 		{
-			m_stones[c] = new TBitArray();
+			m_stones[c] = new TBitArray<N>();
 			m_stones[c]->SetAll(false);
 		}
-		m_emptyStones = new TBitArray();
+		m_emptyStones = new TBitArray<N>();
 		m_emptyStones->SetAll(true);
 	}
 
@@ -69,13 +72,13 @@ public:
 		m_Size = other.m_Size;
 		for (int c = 0; c < 2; c++)
 		{
-			m_stones[c] = new TBitArray(*other.m_stones[c]);
+			m_stones[c] = new TBitArray<N>(*other.m_stones[c]);
 			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
 			{
 				m_groups[c].push_back(new TBitGroup(*(*it)));
 			}
 		}
-		m_emptyStones = new TBitArray(*other.m_emptyStones);
+		m_emptyStones = new TBitArray<N>(*other.m_emptyStones);
 		return *this;
 	}
 
@@ -155,8 +158,8 @@ public:
 
 		if (hasCaptured)
 		{
-			TBitArray capturedStonesAll;
-			TBitArray capturedNeighbors;
+			TBitArray<N> capturedStonesAll;
+			TBitArray<N> capturedNeighbors;
 			for (auto it = capturedStones.begin(); it != capturedStones.end(); ++it)
 			{
 				capturedStonesAll |= (*(*it))->stones;
@@ -241,7 +244,7 @@ private:
 		return (oldGroups.size() > 0);
 	}
 
-	bool CheckCapture(list<Titer>& capturedGroups, list<TBitGroup*>& liberties, TBitArray& stones)
+	bool CheckCapture(list<Titer>& capturedGroups, list<TBitGroup*>& liberties, TBitArray<N>& stones)
 	{
 		bool ret = false;
 		for (auto it = liberties.begin(); it != liberties.end(); ++it)
@@ -255,7 +258,7 @@ private:
 		return ret;
 	}
 
-	bool CheckCaptureEach(TBitGroup& liberty, TBitArray& stones)
+	bool CheckCaptureEach(TBitGroup& liberty, TBitArray<N>& stones)
 	{
 		if (stones.Intersects(liberty.liberty))
 		{
@@ -272,7 +275,7 @@ private:
 		return i*m_Size + j;
 	}
 
-	void AddLiberty(TBitArray& liberty, TBitArray& stones)
+	void AddLiberty(TBitArray<N>& liberty, TBitArray<N>& stones)
 	{
 		for (int i = 0; i < m_Size * m_Size; i++)
 		{
@@ -283,12 +286,12 @@ private:
 		}
 	}
 
-	void GetLiberty(TBitArray* liberty, int move)
+	void GetLiberty(TBitArray<N>* liberty, int move)
 	{
 		GetLibertyGeneric(liberty, move);
 	}
 
-	void GetLibertyGeneric(TBitArray* liberty, int move)
+	void GetLibertyGeneric(TBitArray<N>* liberty, int move)
 	{
 		if (move >= m_Size)
 		{

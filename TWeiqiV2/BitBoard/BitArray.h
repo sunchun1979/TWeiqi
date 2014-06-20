@@ -85,7 +85,7 @@ public:
 
 	bool operator == (const BitArrayBase& other)
 	{
-		return memcmp(m_bits, other.m_bits, m_intLength) == 0;
+		return memcmp(m_bits, other.m_bits, m_intLength * sizeof(int)) == 0;
 	}
 
 	void operator &= (const BitArrayBase& other)
@@ -204,143 +204,48 @@ public:
 	}
 };
 
-class BitArray19 : public BitArrayBase
+template <int N>
+class BitArray : public BitArrayBase
 {
 private:
-	int m_myBits[12];
-
+	int m_myBits[((N*N)>>5)+1];
 public:
-	BitArray19() : BitArrayBase(361, 12, m_myBits)
+	BitArray() : BitArrayBase(N*N, ((N*N)>>5)+1, m_myBits)
 	{
 	}
-	~BitArray19()
+	~BitArray()
 	{
 	}
-
-	BitArray19(const BitArray19& other) : BitArrayBase(other)
+	BitArray(const BitArray& other) : BitArrayBase(other)
 	{
 		*this = other;
 	}
 
-	BitArray19& operator = (const BitArray19& other)
+	BitArray& operator = (const BitArray& other)
 	{
 		BitArrayBase::operator=(other);
-		memcpy(m_myBits, other.m_myBits, sizeof(int)*12);
+		memcpy(m_myBits, other.m_myBits, sizeof(int)*(((N*N)>>5)+1));
 		m_bits = m_myBits;
 		return *this;
 	}
 
-	void operator &= (const BitArray19& other)
+	void operator &= (const BitArray& other)
 	{
 		BitArrayBase::operator&=(other);
 	}
 
-	void operator |= (const BitArray19& other)
+	void operator |= (const BitArray& other)
 	{
 		BitArrayBase::operator|=(other);
 	}
 
-	void operator ^= (const BitArray19& other)
+	void operator ^= (const BitArray& other)
 	{
 		BitArrayBase::operator^=(other);
 	}
 
-	bool operator == (const BitArray19& other)
+	bool operator == (const BitArray& other)
 	{
-		return memcmp(m_bits, other.m_bits, m_intLength) == 0;
-	}
-};
-
-class BitArray9 : public BitArrayBase
-{
-private:
-	int m_myBits[3];
-
-public:
-	BitArray9() : BitArrayBase(81, 3, m_myBits)
-	{
-	}
-	~BitArray9()
-	{
-	}
-
-	BitArray9(const BitArray9& other) : BitArrayBase(other)
-	{
-		*this = other;
-	}
-
-	BitArray9& operator = (const BitArray9& other)
-	{
-		BitArrayBase::operator=(other);
-		memcpy(m_myBits, other.m_myBits, sizeof(int)*3);
-		m_bits = m_myBits;
-		return *this;
-	}
-
-	void operator &= (const BitArray9& other)
-	{
-		BitArrayBase::operator&=(other);
-	}
-
-	void operator |= (const BitArray9& other)
-	{
-		BitArrayBase::operator|=(other);
-	}
-
-	void operator ^= (const BitArray9& other)
-	{
-		BitArrayBase::operator^=(other);
-	}
-
-	bool operator == (const BitArray9& other)
-	{
-		return memcmp(m_bits, other.m_bits, m_intLength) == 0;
-	}
-};
-
-class BitArray5 : public BitArrayBase
-{
-private:
-	int m_myBits[1];
-
-public:
-	BitArray5() : BitArrayBase(25, 1, m_myBits)
-	{
-	}
-	~BitArray5()
-	{
-	}
-
-	BitArray5(const BitArray5& other) : BitArrayBase(other)
-	{
-		*this = other;
-	}
-
-	BitArray5& operator = (const BitArray5& other)
-	{
-		BitArrayBase::operator=(other);
-		memcpy(m_myBits, other.m_myBits, sizeof(int)*1);
-		m_bits = m_myBits;
-		return *this;
-	}
-
-	void operator &= (const BitArray5& other)
-	{
-		BitArrayBase::operator&=(other);
-	}
-
-	void operator |= (const BitArray5& other)
-	{
-		BitArrayBase::operator|=(other);
-	}
-
-	void operator ^= (const BitArray5& other)
-	{
-		BitArrayBase::operator^=(other);
-	}
-
-	bool operator == (const BitArray5& other)
-	{
-		return memcmp(m_bits, other.m_bits, m_intLength) == 0;
+		return BitArrayBase::operator == (m_bits, other.m_bits);
 	}
 };

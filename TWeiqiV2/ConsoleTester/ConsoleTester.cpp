@@ -11,7 +11,7 @@ int trial = 0;
 
 void OneGame(bool print)
 {
-	BitBoard<BitArray19> board(19);
+	BitBoard<BitArray, 19> board(19);
 	int totalMove = 200;
 	int c = BLACK;
 	for (int i = 0; i < totalMove; i++)
@@ -32,24 +32,22 @@ void OneGame(bool print)
 
 void ManualGame9()
 {
-	BitBoard<BitArray9> board(9);
+	BitBoard<BitArray64, 9> board(9);
 	board.Move(4,4,BLACK);
 	board.Move(5,4,WHITE);
 	board.Move(3,4,WHITE);
 	board.Move(4,5,WHITE);
 	board.Move(4,3,WHITE);
-	cout << board.ToString() << endl << endl;
-	cout << board.Move(4,4, BLACK) << endl;
-	cout << board.ToString() << endl << endl;
+	cout << board.ToString() << endl;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	ManualGame9();
 	getchar();
 	srand(1);
 	std::clock_t start;
 	start = std::clock();
-	///ManualGame9();
 	for (int i = 0; i < 10000; i++)
 	{
 		//cout << i << endl;
