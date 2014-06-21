@@ -69,10 +69,10 @@
   </Binaries>
   <Reports>
     <Report>
-      <Path>ConsoleTester140619.vspx</Path>
+      <Path>ConsoleTester140621.vspx</Path>
     </Report>
     <Report>
-      <Path>ConsoleTester140620.vspx</Path>
+      <Path>ConsoleTester140621(1).vspx</Path>
     </Report>
   </Reports>
   <Launches>

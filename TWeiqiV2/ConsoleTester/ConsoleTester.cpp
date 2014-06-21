@@ -11,18 +11,58 @@ int trial = 0;
 
 void OneGame(bool print)
 {
-	BitBoard<BitArray64, 19> board(19);
+	BitBoard<BitArray64, 19> board;
+	BitBoard<BitArray64, 19> boardHistory[2]; // simple ko check
 	int totalMove = 200;
 	int c = BLACK;
 	for (int i = 0; i < totalMove; i++)
 	{
 		int candidates = board.GetNumEmptyPositions();
 		int move = board.GetMoveByIndex(rand() % candidates);
-		while(!board.Move(move, c)){
+		while(!board.Move(move, c, &boardHistory[c])){
 			trial ++;
 			move = board.GetMoveByIndex(rand() % candidates);
 		}
+		boardHistory[c] = board;
 		c = 1 - c;
+	}
+	if (print)
+	{
+		cout << board.ToString() << endl;
+	}
+}
+
+void OneGameFull(bool print)
+{
+	BitBoard<BitArray64, 19> board;
+	BitBoard<BitArray64, 19> boardHistory[2];
+	int c = BLACK;
+	bool gameEnd = false;
+	while (!gameEnd)
+	{
+		int candidates = board.GetNumLegalPositions(c);
+		int move = board.GetLegalMoveByIndex(c, rand() % candidates);
+		while (!board.Move(move, c, &boardHistory[c]))
+		{
+			if (candidates == 1)
+			{
+				gameEnd = true;
+				break;
+			}
+			board.MarkMoveIllegal(c, move);
+			if (board.EndGameCheck())
+			{
+				candidates = board.GetNumLegalPositions(c);
+				move = board.GetLegalMoveByIndex(c, rand() % candidates);
+			}else
+			{
+				gameEnd = true;
+				break;
+			}
+		}
+		boardHistory[c] = board;
+		c = 1 - c;
+		//cout << board.ToString() << endl;
 	}
 	if (print)
 	{
@@ -32,46 +72,36 @@ void OneGame(bool print)
 
 void ManualGame9()
 {
-	BitBoard<BitArray64, 9> board(9);
-	board.Move(4,4,BLACK);
-	board.Move(5,4,WHITE);
-	board.Move(3,4,WHITE);
-	board.Move(4,5,WHITE);
-	board.Move(4,3,WHITE);
+	BitBoard<BitArray64, 9> board;
+	BitBoard<BitArray64, 9> boardHistory[2]; // simple ko check
+	static const int NMoves = 6;
+	int move[2][NMoves][2] = {
+		{ {0, 4}, {1, 4}, {2, 3}, {0, 2}, {1, 2}, {8, 8} },
+		{ {8, 7}, {8, 6}, {8, 5}, {8, 4}, {0, 3}, {1, 3} } 
+	};
+	int c = BLACK;
+	for (int i = 0; i < NMoves; i++)
+	{
+		board.Move(move[c][i][1], move[c][i][0], c);
+		c = 1 - c;
+		board.Move(move[c][i][1], move[c][i][0], c);
+		c = 1 - c;
+	}
 	cout << board.ToString() << endl;
+	getchar();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	ManualGame9();
-	//BitArray64<19> b;
-	//b.Set1(100);
-	//b.Set1(200);
-	//b.Set1(123);
-	//cout << b.ToPositionString() << endl;
-	//cout << "n = " << b.GetNumOfOnes() << endl;
-	//cout << "move = " << b.GetNthOne(0) << endl;
-	//cout << "move = " << b.GetNthOne(1) << endl;
-	//cout << "move = " << b.GetNthOne(2) << endl;
-
-	////uint64_t test = 0;
-	////test |= (1i64 << 17);
-	////test |= (1i64 << 60);
-	////test |= (1i64 << 37);
-	////cout << bitset<64>(test) << endl;
-	////cout << BitArray64Base::GetNthOneEach(test, 1) << endl;
-	////cout << BitArray64Base::GetNthOneEach(test, 2) << endl;
-	////cout << BitArray64Base::GetNthOneEach(test, 3) << endl;
-	getchar();
+	//ManualGame9();
 	srand(10);
 	std::clock_t start;
 	start = std::clock();
 	for (int i = 0; i < 10000; i++)
 	{
-		//cout << i << endl;
-		OneGame(false);
+		OneGameFull(false);
 	}
-	OneGame(true);
+	//OneGameFull(true);
 	cout << "trial = " << trial << endl;
 	std::clock_t end = std::clock();
 	std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;

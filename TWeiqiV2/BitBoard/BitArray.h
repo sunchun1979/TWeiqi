@@ -254,6 +254,8 @@ public:
 
 	bool operator == (const BitArray& other)
 	{
-		return BitArrayBase::operator == (m_bits, other.m_bits);
+		return BitArrayBase::operator == (other);
 	}
+
+	// missing several functions here, ref to Array64
 };

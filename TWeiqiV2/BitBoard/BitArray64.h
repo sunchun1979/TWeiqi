@@ -112,7 +112,7 @@ public:
 		}
 	}
 
-	bool Intersects(const BitArray64Base& other)
+	bool Intersects(const BitArray64Base& other) const
 	{
 		for (int i = m_int64Length; i-- > 0;)
 		{
@@ -191,11 +191,11 @@ public:
 	int GetNumOfOnes()
 	{
 		int ret = 0;
-		for (int i = 0; i < m_int64Length - 1; i++)
+		ret += GetOneEach(m_bits[m_int64Length - 1] & m_lastInt64Mask);
+		for (int i = m_int64Length-1; i-- > 0;)
 		{
 			ret += GetOneEach(m_bits[i]);
 		}
-		ret += GetOneEach(m_bits[m_int64Length - 1] & m_lastInt64Mask);
 		return ret;
 	}
 
@@ -304,6 +304,6 @@ public:
 
 	bool operator == (const BitArray64& other)
 	{
-		return BitArray64Base::operator == (m_bits, other.m_bits);
+		return BitArray64Base::operator == (other);
 	}
 };

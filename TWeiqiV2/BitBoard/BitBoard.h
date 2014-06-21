@@ -30,19 +30,23 @@ protected:
 	TBitArray<N>* m_emptyStones;
 	list<TBitGroup*> m_groups[2];
 
+	TBitArray<N>* m_legal[2];
+
 private:
 
-	BitBoard();
+	//BitBoard();
 
 public:
 
-	BitBoard(int size)
+	BitBoard()
 	{
-		m_Size = size;
+		m_Size = N;
 		for (int c = 0; c < 2; c++)
 		{
 			m_stones[c] = new TBitArray<N>();
 			m_stones[c]->SetAll(false);
+			m_legal[c] = new TBitArray<N>();
+			m_legal[c]->SetAll(true);
 		}
 		m_emptyStones = new TBitArray<N>();
 		m_emptyStones->SetAll(true);
@@ -50,7 +54,16 @@ public:
 
 	BitBoard(const BitBoard& other)
 	{
-		*this = other;
+		m_Size = other.m_Size;
+		for (int c = 0; c < 2; c++)
+		{
+			m_stones[c] = new TBitArray<N>(*other.m_stones[c]);
+			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
+			{
+				m_groups[c].push_back(new TBitGroup(*(*it)));
+			}
+		}
+		m_emptyStones = new TBitArray<N>(*other.m_emptyStones);
 	}
 
 	~BitBoard()
@@ -58,6 +71,7 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			delete m_stones[c];
+			delete m_legal[c];
 			for(Titer it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
 			{
 				delete *it;
@@ -72,13 +86,8 @@ public:
 		m_Size = other.m_Size;
 		for (int c = 0; c < 2; c++)
 		{
-			m_stones[c] = new TBitArray<N>(*other.m_stones[c]);
-			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
-			{
-				m_groups[c].push_back(new TBitGroup(*(*it)));
-			}
+			*m_stones[c] = *other.m_stones[c];
 		}
-		m_emptyStones = new TBitArray<N>(*other.m_emptyStones);
 		return *this;
 	}
 
@@ -113,12 +122,12 @@ public:
 		return ret;
 	}
 
-	bool Move(int i, int j, int color)
+	bool Move(int i, int j, int color, BitBoard* cmp = nullptr)
 	{
-		return Move(GetMove(i,j), color);
+		return Move(GetMove(i,j), color, cmp);
 	}
 
-	bool Move(int move, int color)
+	bool Move(int move, int color, BitBoard* cmp = nullptr)
 	{
 		if (!m_emptyStones->Get(move))
 		{
@@ -136,11 +145,28 @@ public:
 		bool hasCaptured = CheckCapture(capturedStones, m_groups[1-color], newMerged->stones);
 		if (!hasCaptured)
 		{
+			//cout << "newMerged : " << newMerged->liberty.ToPositionString() << endl;
+			//cout << "stones : " << m_stones[1-color]->ToPositionString() << endl;
+			if (!newMerged->liberty.HasTrue())
+			{
+				return false;
+			}
 			if (CheckCaptureEach(*newMerged, *m_stones[1-color]))
 			{
 				return false;
 			}
 		}
+
+		*m_stones[color] |= newMove.stones;
+		if (hasCaptured && (cmp!=nullptr)) // simple ko check
+		{
+			if (*m_stones[color] == *cmp->m_stones[color])
+			{
+				*m_stones[color] ^= newMove.stones;
+				return false;
+			}
+		}
+
 		newMerged->liberty &= *m_emptyStones;
 
 		if (hasMerged)
@@ -153,7 +179,6 @@ public:
 		}
 
 		m_groups[color].push_back(newMerged);
-		*m_stones[color] |= newMerged->stones;
 		*m_emptyStones ^= newMove.stones;
 
 		if (hasCaptured)
@@ -187,22 +212,27 @@ public:
 			}
 		}
 
-		// Debug
-		/*
-		cout << "====" << endl;
 		for (int c = 0; c < 2; c++)
 		{
-			cout << "color = " << c << endl;
-			cout << m_stones[c]->ToPositionString() << endl;
-			for (auto it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
-			{
-				cout << "stone " << (*it)->stones.ToPositionString() << endl;
-				cout << "liberty " << (*it)->liberty.ToPositionString() << endl;
-			}
-			cout << endl;
+			*m_legal[c] = *m_emptyStones;
 		}
-		*/
+
 		return true;
+	}
+
+	int GetNumLegalPositions(int color)
+	{
+		return m_legal[color]->GetNumOfOnes();
+	}
+
+	int GetLegalMoveByIndex(int color, int n)
+	{
+		return m_legal[color]->GetNthOne(n);
+	}
+
+	void MarkMoveIllegal(int color, int move)
+	{
+		m_legal[color]->Set0(move);
 	}
 
 	int GetNumEmptyPositions()
@@ -213,23 +243,16 @@ public:
 	int GetMoveByIndex(int n)
 	{
 		return m_emptyStones->GetNthOne(n);
-		//for (int i = 0; i < m_Size * m_Size; i++)
-		//{
-		//	if (m_emptyStones->Get(i))
-		//	{
-		//		n--;
-		//		if (n == -1)
-		//		{
-		//			return i;
-		//		}
-		//	}
-		//}
-		//return -1;
+	}
+
+	bool EndGameCheck()
+	{
+		return m_legal[0]->Intersects(*m_legal[1]);
 	}
 
 private:
 
-	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups, TBitGroup& newMove)
+	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups, const TBitGroup& newMove)
 	{
 		newMerged = newMove;
 		for(auto it = groups.begin(); it != groups.end(); ++it)
@@ -238,8 +261,10 @@ private:
 			{
 				oldGroups.push_back(it);
 				newMerged.stones |= (*it)->stones;
-				(*it)->liberty.XorTrue(newMove.stones);
+
 				newMerged.liberty |= (*it)->liberty;
+				newMerged.liberty.XorTrue((*it)->stones);
+				newMerged.liberty.XorTrue(newMove.stones);
 			}
 		}
 		return (oldGroups.size() > 0);
@@ -309,6 +334,22 @@ private:
 		if (move % m_Size < m_Size - 1)
 		{
 			liberty->Set1(move + 1);
+		}
+	}
+
+	void DebugCode(string prefix)
+	{
+		cout << "==== " << prefix << " ====" << endl;
+		for (int c = 0; c < 2; c++)
+		{
+			cout << "color = " << c << endl;
+			cout << m_stones[c]->ToPositionString() << endl;
+			for (auto it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
+			{
+				cout << "stone " << (*it)->stones.ToPositionString() << endl;
+				cout << "liberty " << (*it)->liberty.ToPositionString() << endl;
+			}
+			cout << endl;
 		}
 	}
 };
