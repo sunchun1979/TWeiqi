@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <list>
+#include <deque>
 #include <vector>
 
 #include "BitArray.h"
@@ -33,6 +34,10 @@ protected:
 	TBitArray<N>* m_legal[2];
 
 private:
+
+	TBitGroup m_newMove;
+	list<Titer> m_oldGroups;
+	list<Titer> m_capturedStones;
 
 	//BitBoard();
 
@@ -129,49 +134,24 @@ public:
 
 	bool Move(int move, int color, BitBoard* cmp = nullptr)
 	{
-		if (!m_emptyStones->Get(move))
+		TBitGroup* newMerged = new TBitGroup();
+		bool hasMerged;
+		bool hasCaptured;
+
+		m_oldGroups.clear();
+		m_capturedStones.clear();
+
+		if(!CheckLegal(move, color, cmp, 
+			newMerged, hasMerged, hasCaptured))
 		{
 			return false;
-		}
-		TBitGroup newMove;
-		newMove.stones.Set1(move);
-		newMove.liberty.SetAll(false);
-		GetLiberty(&newMove.liberty, move);
-
-		TBitGroup* newMerged = new TBitGroup();
-		list<Titer> oldGroups;
-		bool hasMerged = Merge(*newMerged, oldGroups, m_groups[color], newMove);
-		list<Titer> capturedStones, selfCapture;
-		bool hasCaptured = CheckCapture(capturedStones, m_groups[1-color], newMerged->stones);
-		if (!hasCaptured)
-		{
-			//cout << "newMerged : " << newMerged->liberty.ToPositionString() << endl;
-			//cout << "stones : " << m_stones[1-color]->ToPositionString() << endl;
-			if (!newMerged->liberty.HasTrue())
-			{
-				return false;
-			}
-			if (CheckCaptureEach(*newMerged, *m_stones[1-color]))
-			{
-				return false;
-			}
-		}
-
-		*m_stones[color] |= newMove.stones;
-		if (hasCaptured && (cmp!=nullptr)) // simple ko check
-		{
-			if (*m_stones[color] == *cmp->m_stones[color])
-			{
-				*m_stones[color] ^= newMove.stones;
-				return false;
-			}
 		}
 
 		newMerged->liberty &= *m_emptyStones;
 
 		if (hasMerged)
 		{
-			for (list<Titer>::iterator it = oldGroups.begin(); it != oldGroups.end(); ++it)
+			for (list<Titer>::iterator it = m_oldGroups.begin(); it != m_oldGroups.end(); ++it)
 			{
 				delete *(*it);
 				m_groups[color].erase(*it);
@@ -179,13 +159,13 @@ public:
 		}
 
 		m_groups[color].push_back(newMerged);
-		*m_emptyStones ^= newMove.stones;
+		*m_emptyStones ^= m_newMove.stones;
 
 		if (hasCaptured)
 		{
 			TBitArray<N> capturedStonesAll;
 			TBitArray<N> capturedNeighbors;
-			for (auto it = capturedStones.begin(); it != capturedStones.end(); ++it)
+			for (auto it = m_capturedStones.begin(); it != m_capturedStones.end(); ++it)
 			{
 				capturedStonesAll |= (*(*it))->stones;
 				AddLiberty(capturedNeighbors, (*(*it))->stones);
@@ -206,9 +186,9 @@ public:
 
 		for (auto it = m_groups[1-color].begin(); it != m_groups[1-color].end(); ++it)
 		{
-			if (newMove.stones.Intersects((*it)->liberty))
+			if (m_newMove.stones.Intersects((*it)->liberty))
 			{
-				(*it)->liberty.XorTrue(newMove.stones);
+				(*it)->liberty.XorTrue(m_newMove.stones);
 			}
 		}
 
@@ -247,24 +227,97 @@ public:
 
 	bool EndGameCheck()
 	{
-		return m_legal[0]->Intersects(*m_legal[1]);
+		return ! (m_legal[0]->Intersects(*m_legal[1]));
 	}
 
-private:
-
-	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups, const TBitGroup& newMove)
+	/*
+	The following function is too expensive, resulting more move numbers to the end.
+	bool EndGameCheckComplex()
 	{
-		newMerged = newMove;
+		TBitGroup newMove;
+		TBitGroup* newMerged = new TBitGroup();
+		list<Titer> oldGroups;
+		list<Titer> capturedStones, selfCapture;
+		bool hasMerged;
+		bool hasCaptured;
+
+		for (int c = 0; c < 2; c++)
+		{
+			int length = GetNumLegalPositions(c);
+			for (int i = 0; i < length; i++)
+			{
+				int move = GetLegalMoveByIndex(c, i);
+				newMove.stones.SetAll(false);
+				newMove.liberty.SetAll(false);
+				oldGroups.clear();
+				capturedStones.clear();
+				selfCapture.clear();
+				if (!CheckLegal(move, c, nullptr, newMove, newMerged, oldGroups, capturedStones, selfCapture, hasMerged, hasCaptured, false))
+				{
+					m_legal[c]->Set0(move);
+				}
+			}
+		}
+		return ! (m_legal[0]->Intersects(*m_legal[1]));
+	}
+	*/
+
+public:
+
+	bool CheckLegal(int& move, int& color, BitBoard* cmp,
+		TBitGroup*& newMerged,
+		bool& hasMerged, bool& hasCaptured
+		)
+	{
+		if (!m_emptyStones->Get(move))
+		{
+			return false;
+		}
+		m_newMove.stones.SetAll(false);
+		m_newMove.stones.Set1(move);
+		m_newMove.liberty.SetAll(false);
+		GetLiberty(&m_newMove.liberty, move);
+		hasMerged = Merge(*newMerged, m_oldGroups, m_groups[color]);
+		hasCaptured = CheckCapture(m_capturedStones, m_groups[1-color], newMerged->stones);
+		if (!hasCaptured)
+		{
+			//cout << "newMerged : " << newMerged->liberty.ToPositionString() << endl;
+			//cout << "stones : " << m_stones[1-color]->ToPositionString() << endl;
+			if (!newMerged->liberty.HasTrue())
+			{
+				return false;
+			}
+			if (CheckCaptureEach(*newMerged, *m_stones[1-color]))
+			{
+				return false;
+			}
+		}
+
+		*m_stones[color] |= m_newMove.stones;
+		if (hasCaptured && (cmp!=nullptr)) // simple ko check
+		{
+			if (*m_stones[color] == *cmp->m_stones[color])
+			{
+				*m_stones[color] ^= m_newMove.stones;
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool Merge(TBitGroup& newMerged, list<Titer>& oldGroups, list<TBitGroup*>& groups)
+	{
+		newMerged = m_newMove;
 		for(auto it = groups.begin(); it != groups.end(); ++it)
 		{
-			if (newMove.stones.Intersects((*it)->liberty))
+			if (m_newMove.stones.Intersects((*it)->liberty))
 			{
 				oldGroups.push_back(it);
 				newMerged.stones |= (*it)->stones;
 
 				newMerged.liberty |= (*it)->liberty;
 				newMerged.liberty.XorTrue((*it)->stones);
-				newMerged.liberty.XorTrue(newMove.stones);
+				newMerged.liberty.XorTrue(m_newMove.stones);
 			}
 		}
 		return (oldGroups.size() > 0);
@@ -298,40 +351,54 @@ private:
 
 	int GetMove(int i, int j)
 	{
-		return i*m_Size + j;
+		return i*N + j;
 	}
 
 	void AddLiberty(TBitArray<N>& liberty, TBitArray<N>& stones)
 	{
-		for (int i = 0; i < m_Size * m_Size; i++)
+		int c = stones.GetNumOfOnes();
+		if (c < N*3)
 		{
-			if (stones.Get(i))
+			for (int i = 0; i < c; i++)
 			{
-				GetLiberty(&liberty, i);
+				GetLiberty(&liberty, stones.GetNthOne(i));
+			}
+		}
+		else
+		{
+			for (int i = 0; i < N * N; i++)
+			{
+				if (stones.Get(i))
+				{
+					GetLiberty(&liberty, i);
+				}
 			}
 		}
 	}
 
 	void GetLiberty(TBitArray<N>* liberty, int move)
 	{
-		GetLibertyGeneric(liberty, move);
+		if(N==19)
+			*liberty |= LibertyConst64_19[move];
+		else
+			GetLibertyGeneric(liberty, move);
 	}
 
 	void GetLibertyGeneric(TBitArray<N>* liberty, int move)
 	{
-		if (move >= m_Size)
+		if (move >= N)
 		{
-			liberty->Set1(move - m_Size);
+			liberty->Set1(move - N);
 		}
-		if (move + m_Size < m_Size*m_Size)
+		if (move + N < N*N)
 		{
-			liberty->Set1(move + m_Size);
+			liberty->Set1(move + N);
 		}
-		if (move % m_Size > 0) // to optimize with bit op
+		if (move % N > 0) // to optimize with bit op
 		{
 			liberty->Set1(move - 1);
 		}
-		if (move % m_Size < m_Size - 1)
+		if (move % N < N - 1)
 		{
 			liberty->Set1(move + 1);
 		}

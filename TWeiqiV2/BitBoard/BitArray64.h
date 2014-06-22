@@ -42,10 +42,11 @@ public:
 	string ToString()
 	{
 		stringstream ss;
-		for (int i = 0; i < m_int64Length; i++)
+		for (int i = 0; i < m_int64Length - 1; i++)
 		{
-			ss << " " << m_bits[i];
+			ss << m_bits[i] << ", ";
 		}
+		ss << m_bits[m_int64Length - 1];
 		return ss.str();
 	}
 
@@ -101,6 +102,14 @@ public:
 		for (int i = m_int64Length; i-- > 0;)
 		{
 			m_bits[i] |= other.m_bits[i];
+		}
+	}
+
+	void operator |= (const uint64_t* other)
+	{
+		for (int i = m_int64Length; i-- > 0;)
+		{
+			m_bits[i] |= other[i];
 		}
 	}
 
@@ -271,6 +280,12 @@ public:
 	BitArray64() : BitArray64Base(N*N, ((N*N)>>6)+1, m_myBits)
 	{
 	}
+
+	BitArray64(uint64_t* t) : BitArray64Base(N*N, ((N*N)>>6)+1, m_myBits)
+	{
+		memcpy(m_myBits, t, sizeof(uint64_t)*(((N*N)>>6)+1));
+	}
+
 	~BitArray64()
 	{
 	}
@@ -293,6 +308,11 @@ public:
 	}
 
 	void operator |= (const BitArray64& other)
+	{
+		BitArray64Base::operator|=(other);
+	}
+
+	void operator |= (const uint64_t* other)
 	{
 		BitArray64Base::operator|=(other);
 	}

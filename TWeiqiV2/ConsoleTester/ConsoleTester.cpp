@@ -7,13 +7,14 @@
 #include <cstdlib>
 #include <ctime>
 
-int trial = 0;
+long trial = 0;
 
+template <int N>
 void OneGame(bool print)
 {
-	BitBoard<BitArray64, 19> board;
-	BitBoard<BitArray64, 19> boardHistory[2]; // simple ko check
-	int totalMove = 200;
+	BitBoard<BitArray64, N> board;
+	BitBoard<BitArray64, N> boardHistory[2]; // simple ko check
+	int totalMove = N*N/2;
 	int c = BLACK;
 	for (int i = 0; i < totalMove; i++)
 	{
@@ -32,10 +33,63 @@ void OneGame(bool print)
 	}
 }
 
+//void OneGameFull(bool print)
+//{
+//	BitBoard<BitArray64, 9> board;
+//	BitBoard<BitArray64, 9> boardHistory[2];
+//	int c = BLACK;
+//	bool gameEnd = false;
+//	while (!gameEnd)
+//	{
+//		int candidates = board.GetNumLegalPositions(c);
+//		int move = board.GetLegalMoveByIndex(c, rand() % candidates);
+//		while (!board.Move(move, c, &boardHistory[c]))
+//		{
+//			if (candidates == 1)
+//			{
+//				gameEnd = true;
+//				break;
+//			}
+//			board.MarkMoveIllegal(c, move);
+//			if (gameEnd = board.EndGameCheck())
+//			{
+//				break;
+//			}else
+//			{
+//				candidates = board.GetNumLegalPositions(c);
+//				if (candidates > 1)
+//				{
+//					move = board.GetLegalMoveByIndex(c, rand() % candidates);
+//					trial++;
+//				}
+//				else
+//				{
+//					gameEnd = true;
+//					break;
+//				}
+//			}
+//		}
+//		trial++;
+//		if (!gameEnd)
+//		{
+//			boardHistory[c] = board;
+//			c = 1 - c;
+//			cout << board.ToString() << endl;
+//			//getchar();
+//		}
+//	}
+//	if (print)
+//	{
+//		cout << "final position" << endl;
+//		cout << board.ToString() << endl;
+//	}
+//}
+
+template <int N>
 void OneGameFull(bool print)
 {
-	BitBoard<BitArray64, 19> board;
-	BitBoard<BitArray64, 19> boardHistory[2];
+	BitBoard<BitArray64, N> board;
+	BitBoard<BitArray64, N> boardHistory[2];
 	int c = BLACK;
 	bool gameEnd = false;
 	while (!gameEnd)
@@ -50,22 +104,23 @@ void OneGameFull(bool print)
 				break;
 			}
 			board.MarkMoveIllegal(c, move);
-			if (board.EndGameCheck())
+			if (gameEnd = board.EndGameCheck())
+			{
+				break;
+			}else
 			{
 				candidates = board.GetNumLegalPositions(c);
 				move = board.GetLegalMoveByIndex(c, rand() % candidates);
-			}else
-			{
-				gameEnd = true;
-				break;
+				trial++;
 			}
 		}
+		trial++;
 		boardHistory[c] = board;
 		c = 1 - c;
-		//cout << board.ToString() << endl;
 	}
 	if (print)
 	{
+		cout << "final position" << endl;
 		cout << board.ToString() << endl;
 	}
 }
@@ -94,17 +149,22 @@ void ManualGame9()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//ManualGame9();
+	OneGame<9>(true);
+	getchar();
+
+	// final performance
 	srand(10);
 	std::clock_t start;
 	start = std::clock();
 	for (int i = 0; i < 10000; i++)
 	{
-		OneGameFull(false);
+		OneGameFull<19>(false);
 	}
-	//OneGameFull(true);
+	OneGameFull<19>(true);
 	cout << "trial = " << trial << endl;
 	std::clock_t end = std::clock();
 	std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
+
 	return 0;
 }
 
