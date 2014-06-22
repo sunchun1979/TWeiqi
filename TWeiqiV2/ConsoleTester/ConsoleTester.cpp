@@ -139,8 +139,12 @@ void ManualGame9()
 	{
 		board.Move(move[c][i][1], move[c][i][0], c);
 		c = 1 - c;
+		cout << board.ToString() << endl;
+		getchar();
 		board.Move(move[c][i][1], move[c][i][0], c);
 		c = 1 - c;
+		cout << board.ToString() << endl;
+		getchar();
 	}
 	cout << board.ToString() << endl;
 	getchar();
@@ -150,7 +154,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	//ManualGame9();
 	OneGame<9>(true);
-	getchar();
+	//getchar();
 
 	// final performance
 	srand(10);
