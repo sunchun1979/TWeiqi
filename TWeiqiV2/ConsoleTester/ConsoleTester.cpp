@@ -26,6 +26,11 @@ void OneGame(bool print)
 		}
 		boardHistory[c] = board;
 		c = 1 - c;
+	if (print)
+	{
+		cout << board.ToString() << endl;
+		getchar();
+	}
 	}
 	if (print)
 	{
@@ -117,6 +122,11 @@ void OneGameFull(bool print)
 		trial++;
 		boardHistory[c] = board;
 		c = 1 - c;
+		//if (print)
+		//{
+		//	cout << board.ToString() << endl;
+		//	getchar();
+		//}
 	}
 	if (print)
 	{
@@ -131,7 +141,7 @@ void ManualGame9()
 	BitBoard<BitArray64, 9> boardHistory[2]; // simple ko check
 	static const int NMoves = 6;
 	int move[2][NMoves][2] = {
-		{ {0, 4}, {1, 4}, {2, 3}, {0, 2}, {1, 2}, {8, 8} },
+		{ {0, 4}, {1, 4}, {2, 3}, {0, 2}, {1, 2}, {2, 2} },
 		{ {8, 7}, {8, 6}, {8, 5}, {8, 4}, {0, 3}, {1, 3} } 
 	};
 	int c = BLACK;
@@ -152,12 +162,13 @@ void ManualGame9()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	srand(10);
 	//ManualGame9();
-	OneGame<9>(true);
+	//OneGameFull<9>(true);
+	//OneGameFull<5>(true);
 	//getchar();
 
 	// final performance
-	srand(10);
 	std::clock_t start;
 	start = std::clock();
 	for (int i = 0; i < 10000; i++)

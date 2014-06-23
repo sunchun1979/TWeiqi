@@ -67,11 +67,6 @@
       <ProjName>ConsoleTester</ProjName>
     </ProjBinary>
   </Binaries>
-  <Reports>
-    <Report>
-      <Path>ConsoleTester140622.vspx</Path>
-    </Report>
-  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{3F562C22-5367-48BE-B771-712147E7D5CB}|ConsoleTester\ConsoleTester.vcxproj</Path>
