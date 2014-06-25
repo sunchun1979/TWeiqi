@@ -1,11 +1,15 @@
 // ConsoleTester.cpp : Defines the entry point for the console application.
 //
 #include "BitBoard.h"
+#include "TGame.h"
 
 #include "stdafx.h"
 
 #include <cstdlib>
 #include <ctime>
+
+
+#pragma region PerformanceTest
 
 long trial = 0;
 
@@ -135,6 +139,23 @@ void OneGameFull(bool print)
 	}
 }
 
+void PerformanceTest()
+{
+	srand(10);
+	std::clock_t start;
+	start = std::clock();
+	for (int i = 0; i < 10000; i++)
+	{
+		OneGameFull<19>(false);
+	}
+	OneGameFull<19>(true);
+	cout << "trial = " << trial << endl;
+	std::clock_t end = std::clock();
+	std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
+}
+
+#pragma endregion PerformanceTest
+
 void ManualGame9()
 {
 	BitBoard<BitArray64, 9> board;
@@ -162,24 +183,10 @@ void ManualGame9()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	srand(10);
-	//ManualGame9();
-	//OneGameFull<9>(true);
-	//OneGameFull<5>(true);
-	//getchar();
-
-	// final performance
-	std::clock_t start;
-	start = std::clock();
-	for (int i = 0; i < 10000; i++)
-	{
-		OneGameFull<19>(false);
-	}
-	OneGameFull<19>(true);
-	cout << "trial = " << trial << endl;
-	std::clock_t end = std::clock();
-	std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
-
+	TGame<19> t;
+	t.PlayFromCurrent(100, BLACK);
+	auto v = t.GetCurrentStones(BLACK);
+	cout << v.ToString() << endl;
 	return 0;
 }
 

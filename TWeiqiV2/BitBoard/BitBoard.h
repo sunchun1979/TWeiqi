@@ -230,6 +230,11 @@ public:
 		return ! (m_legal[0]->Intersects(*m_legal[1]));
 	}
 
+	const TBitArray<N> GetRawStones(int color)
+	{
+		return *m_stones[color];
+	}
+
 	/*
 	The following function is too expensive, resulting more move numbers to the end.
 	bool EndGameCheckComplex()
