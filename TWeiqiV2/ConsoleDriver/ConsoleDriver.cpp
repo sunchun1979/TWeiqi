@@ -40,6 +40,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			auto current = game.GetCurrentStones((int)args[0]);
 			cout << current.ToString() << endl;
 		}
+		cout << "done" << endl;
 	}
 	return 0;
 }
