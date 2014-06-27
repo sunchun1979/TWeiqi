@@ -184,8 +184,8 @@ void ManualGame9()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	TGame<19> t;
-	t.PlayFromCurrent(100, BLACK);
-	auto v = t.GetCurrentStones(BLACK);
+	t.LoadSGF("C:\\Users\\chunsun\\SkyDrive\\Projects\\Weiqi\\DataSet\\single\\66.sgf");
+	auto v = t.GetCurrentBoard();
 	cout << v.ToString() << endl;
 	return 0;
 }

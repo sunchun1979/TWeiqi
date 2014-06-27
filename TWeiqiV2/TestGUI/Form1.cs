@@ -107,14 +107,15 @@ namespace TestGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string ret; 
+            string ret;
 
-            Program.process.StandardInput.WriteLine("move 100 0");
+            Program.process.StandardInput.WriteLine("loadsgf C:\\Users\\chunsun\\SkyDrive\\Projects\\Weiqi\\DataSet\\single\\66.sgf");
             ret = Program.process.StandardOutput.ReadLine();
-            Program.process.StandardInput.WriteLine("move 101 1");
-            ret = Program.process.StandardOutput.ReadLine();
-            Program.process.StandardInput.WriteLine("move 99 0");
-            ret = Program.process.StandardOutput.ReadLine();
+
+            //Program.process.StandardInput.WriteLine("move 101 1");
+            //ret = Program.process.StandardOutput.ReadLine();
+            //Program.process.StandardInput.WriteLine("move 99 0");
+            //ret = Program.process.StandardOutput.ReadLine();
             Program.process.StandardInput.WriteLine("getcurrent 0");
             ret = Program.process.StandardOutput.ReadLine();
             var rawBlack = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();

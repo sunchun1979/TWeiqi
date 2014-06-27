@@ -96,6 +96,21 @@ public:
 		return *this;
 	}
 
+	void Clear()
+	{
+		for (int c = 0; c < 2; c++)
+		{
+			m_stones[c]->SetAll(false);
+			m_legal[c]->SetAll(true);
+			for(Titer it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
+			{
+				delete *it;
+			}
+			m_groups[c].clear();
+		}
+		m_emptyStones->SetAll(true);
+	}
+
 	bool operator == (const BitBoard& other)
 	{
 		return ((m_Size == other->m_Size) && (*m_stones[0] == *other->m_stones[0]) && (*m_stones[1] == *other->m_stones[1]));

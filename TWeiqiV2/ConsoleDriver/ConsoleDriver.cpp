@@ -30,16 +30,20 @@ int _tmain(int argc, _TCHAR* argv[])
 		int firstSpace = (int)commandEx.find_first_of(" ");
 		string prefix = commandEx.substr(0, firstSpace);
 		istringstream rest(commandEx.substr(firstSpace + 1, commandEx.length()));
-		istream_iterator<uint64_t> beg(rest), end;
-		vector<uint64_t> args(beg, end);
+		istream_iterator<string> beg(rest), end;
+		vector<string> args(beg, end);
 		if (prefix == "move")
 		{
-			game.PlayFromCurrent((int)args[0], (int)args[1]);
+			game.PlayFromCurrent(stoi(args[0]), stoi(args[1]));
 			cout << "done" << endl;
 		}else if (prefix == "getcurrent")
 		{
-			auto current = game.GetCurrentStones((int)args[0]);
+			auto current = game.GetCurrentStones(stoi(args[0]));
 			cout << current.ToString() << endl;
+		}else if (prefix == "loadsgf")
+		{
+			game.LoadSGF(args[0]);
+			cout << "done" << endl;
 		}
 	}
 	return 0;
