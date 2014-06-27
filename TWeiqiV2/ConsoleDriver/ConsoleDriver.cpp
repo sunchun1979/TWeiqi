@@ -35,12 +35,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (prefix == "move")
 		{
 			game.PlayFromCurrent((int)args[0], (int)args[1]);
+			cout << "done" << endl;
 		}else if (prefix == "getcurrent")
 		{
 			auto current = game.GetCurrentStones((int)args[0]);
 			cout << current.ToString() << endl;
 		}
-		cout << "done" << endl;
 	}
 	return 0;
 }

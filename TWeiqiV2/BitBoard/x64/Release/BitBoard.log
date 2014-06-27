@@ -1,4 +1,4 @@
-﻿Build started 6/26/2014 12:02:31 AM.
+﻿Build started 6/26/2014 10:44:24 AM.
      1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\BitBoard\BitBoard.vcxproj" on node 3 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I..\TGame /Zi /nologo /W3 /WX- /sdl /Ox /Ob2 /Oi /Ot /Oy /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D BITBOARD_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"x64\Release\BitBoard.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
@@ -15,4 +15,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.49
+Time Elapsed 00:00:01.54
