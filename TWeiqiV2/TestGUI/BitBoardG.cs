@@ -9,24 +9,25 @@ namespace TestGUI
     class BitBoardG
     {
         private List<Tuple<int, int>> _positions;
+        private int _size;
         
-        public BitBoardG()
+        public BitBoardG(int size)
         {
+            _size = size;
             _positions = new List<Tuple<int, int>>();
         }
 
-        public BitBoardG(UInt64[] bitRep)
+        public BitBoardG(int size, UInt64[] bitRep) : this(size)
         {
-            _positions = new List<Tuple<int, int>>();
             LoadFrom(bitRep);
         }
 
         public void LoadFrom(UInt64[] bitRep)
         {
             _positions.Clear();
-            for (int i = 0; i < Constants.Size; i++)
+            for (int i = 0; i < _size; i++)
             {
-                for (int j = 0; j < Constants.Size; j++)
+                for (int j = 0; j < _size; j++)
                 {
                     int move = GetMove(i, j);
                     if (CheckBit(bitRep, move))
@@ -44,7 +45,7 @@ namespace TestGUI
 
         public UInt64[] ToBitArray()
         {
-            int length = ( Constants.Size * Constants.Size ) >> 6 + 1;
+            int length = ( _size * _size ) >> 6 + 1;
             var ret = new UInt64[length];
             foreach (var item in GetPositions())
             {
@@ -54,7 +55,7 @@ namespace TestGUI
             return ret;
         }
 
-        public static void SetBit(UInt64[] bitRep, int index, bool value)
+        public void SetBit(UInt64[] bitRep, int index, bool value)
         {
             UInt64 lg = 1;
             if (value)
@@ -67,20 +68,20 @@ namespace TestGUI
             }
         }
 
-        public static bool CheckBit(UInt64[] bitRep, int index)
+        public bool CheckBit(UInt64[] bitRep, int index)
         {
             UInt64 lg = 1;
             return ((bitRep[index >> 6] & (lg << (index & 63))) != 0);
         }
 
-        public static int GetMove(int i, int j)
+        public int GetMove(int i, int j)
         {
-            return i * Constants.Size + j;
+            return i * _size + j;
         }
 
-        public static Tuple<int, int> GetPosition(int move)
+        public Tuple<int, int> GetPosition(int move)
         {
-            return new Tuple<int, int>(move / Constants.Size, move % Constants.Size);
+            return new Tuple<int, int>(move / _size, move % _size);
         }
     }
 }

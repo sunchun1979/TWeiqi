@@ -14,17 +14,47 @@ namespace TestGUI
 {
     public partial class Form1 : Form
     {
-        private BitBoardG blackStones;
-        private BitBoardG whiteStones;
+        class DBoard
+        {
+            public BitBoardG blackStones;
+            public BitBoardG whiteStones;
+            public int size;
+            public Process engine;
+
+            public DBoard(int _size)
+            {
+                size = _size;
+                blackStones = new BitBoardG(size);
+                whiteStones = new BitBoardG(size);
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardInput = true;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                if (size == 19)
+                {
+                    startInfo.FileName = @"..\..\..\x64\Release\ConsoleDriver.exe";
+                }
+                else if (size == 9)
+                {
+                    startInfo.FileName = @"..\..\..\x64\Release\ConsoleDriver9.exe";
+                }
+
+                engine = new Process();
+                engine.StartInfo = startInfo;
+                engine.Start();
+            }
+        }
+
+        private DBoard[] board = new DBoard[2];
 
         public Form1()
         {
             InitializeComponent();
-            blackStones = new BitBoardG();
-            whiteStones = new BitBoardG();
         }
 
-        private void paintBoard(Panel panel)
+        private void paintBoard(Panel panel, DBoard db)
         {
             BufferedGraphics myBuffer;
             BufferedGraphicsContext currentContext;
@@ -33,44 +63,50 @@ namespace TestGUI
 
             Graphics G = myBuffer.Graphics;
 
+            int size = db.size;
+
             #region painting the board
             // Painting the board itself
             G.DrawImage(panel.BackgroundImage, new Point(0, 0));
+
             using (var p = new Pen(Color.Black, 1))
             {
-                for (int i = 0; i < Constants.Size; i++)
+                for (int i = 0; i < size; i++)
                 {
                     int x1 = Constants.CellSize;
                     int y1 = Constants.CellSize + i * Constants.CellSize;
-                    int x2 = Constants.Size * Constants.CellSize;
+                    int x2 = size * Constants.CellSize;
                     int y2 = y1;
                     G.DrawLine(p, new Point(x1, y1), new Point(x2, y2));
                 }
-                for (int i = 0; i < Constants.Size; i++)
+                for (int i = 0; i < size; i++)
                 {
                     int x1 = Constants.CellSize + i * Constants.CellSize;
                     int y1 = Constants.CellSize;
                     int x2 = x1;
-                    int y2 = Constants.Size * Constants.CellSize;
+                    int y2 = size * Constants.CellSize;
                     G.DrawLine(p, new Point(x1, y1), new Point(x2, y2));
                 }
             }
-            using (var p = new SolidBrush(Color.Black))
+            if (size == 19)
             {
-                int[] dotx = { 4, 10, 16, 4, 10, 16, 4, 10, 16 };
-                int[] doty = { 4, 4, 4, 10, 10, 10, 16, 16, 16 };
-                for (int i = 0; i < dotx.Length; i++)
+                using (var p = new SolidBrush(Color.Black))
                 {
-                    int x0 = Constants.CellSize * dotx[i];
-                    int y0 = Constants.CellSize * doty[i];
-                    G.FillEllipse(p, x0 - 3, y0 - 3, 6, 6);
+                    int[] dotx = { 4, 10, 16, 4, 10, 16, 4, 10, 16 };
+                    int[] doty = { 4, 4, 4, 10, 10, 10, 16, 16, 16 };
+                    for (int i = 0; i < dotx.Length; i++)
+                    {
+                        int x0 = Constants.CellSize * dotx[i];
+                        int y0 = Constants.CellSize * doty[i];
+                        G.FillEllipse(p, x0 - 3, y0 - 3, 6, 6);
+                    }
                 }
             }
             #endregion
 
             // Painting the stones
-            DrawStone(G, blackStones, new Bitmap(TestGUI.Properties.Resources._24));
-            DrawStone(G, whiteStones, new Bitmap(TestGUI.Properties.Resources._24_2));
+            DrawStone(G, db.blackStones, new Bitmap(TestGUI.Properties.Resources._24));
+            DrawStone(G, db.whiteStones, new Bitmap(TestGUI.Properties.Resources._24_2));
             myBuffer.Render();
             myBuffer.Render(panel.CreateGraphics());
         }
@@ -109,22 +145,62 @@ namespace TestGUI
         {
             string ret;
 
-            Program.process.StandardInput.WriteLine("loadsgf C:\\Users\\chunsun\\SkyDrive\\Projects\\Weiqi\\DataSet\\single\\66.sgf");
-            ret = Program.process.StandardOutput.ReadLine();
+            board[0].engine.StandardInput.WriteLine("loadsgf C:\\Users\\chunsun\\SkyDrive\\Projects\\Weiqi\\DataSet\\single\\66.sgf");
+            ret = board[0].engine.StandardOutput.ReadLine();
 
             //Program.process.StandardInput.WriteLine("move 101 1");
             //ret = Program.process.StandardOutput.ReadLine();
             //Program.process.StandardInput.WriteLine("move 99 0");
             //ret = Program.process.StandardOutput.ReadLine();
-            Program.process.StandardInput.WriteLine("getcurrent 0");
-            ret = Program.process.StandardOutput.ReadLine();
+            board[0].engine.StandardInput.WriteLine("getcurrent 0");
+            ret = board[0].engine.StandardOutput.ReadLine();
             var rawBlack = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
-            blackStones.LoadFrom(rawBlack);
-            Program.process.StandardInput.WriteLine("getcurrent 1");
-            ret = Program.process.StandardOutput.ReadLine();
+            board[0].blackStones.LoadFrom(rawBlack);
+            board[0].engine.StandardInput.WriteLine("getcurrent 1");
+            ret = board[0].engine.StandardOutput.ReadLine();
             var rawWhite = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
-            whiteStones.LoadFrom(rawWhite);
-            paintBoard(panel1);
+            board[0].whiteStones.LoadFrom(rawWhite);
+            paintBoard(panel1, board[0]);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            board[0].engine.StandardInput.WriteLine("exit");
+            board[1].engine.StandardInput.WriteLine("exit");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            board[0] = new DBoard(19);
+            board[1] = new DBoard(9);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            paintBoard(panel1, board[0]);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            paintBoard(panel2, board[1]);
+        }
+
+        private void panel2_MouseClick(object sender, MouseEventArgs e)
+        {
+            int x = (int)Math.Round((double)e.X / Constants.CellSize - 1, MidpointRounding.AwayFromZero);
+            int y = (int)Math.Round((double)e.Y / Constants.CellSize - 1, MidpointRounding.AwayFromZero);
+            int move = board[1].blackStones.GetMove(x, y);
+            if ((move >=0) && (move<board[1].size*board[1].size))
+            {
+                board[1].engine.StandardInput.WriteLine("move " + move + " 0");
+                string ret = board[1].engine.StandardOutput.ReadLine();
+                var rawStones = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
+                board[1].blackStones.LoadFrom(rawStones);
+                ret = board[1].engine.StandardOutput.ReadLine();
+                rawStones = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
+                board[1].whiteStones.LoadFrom(rawStones);
+            }
+            paintBoard(panel2, board[1]);
         }
     }
 }

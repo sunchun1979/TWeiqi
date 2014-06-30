@@ -102,6 +102,40 @@ public:
 		return false;
 	}
 
+	bool ComputerPlay(int color)
+	{
+		// Random play
+		int candidates = m_currentPosition.GetNumLegalPositions(color);
+		int move = m_currentPosition.GetLegalMoveByIndex(color, rand() % candidates);
+		bool gameEnd = false;
+		while (!m_currentPosition.Move(move, color, &m_KOCheck[color]))
+		{
+			if (candidates == 1)
+			{
+				gameEnd = true;
+				break;
+			}
+			m_currentPosition.MarkMoveIllegal(color, move);
+			if (gameEnd = m_currentPosition.EndGameCheck())
+			{
+				break;
+			}else
+			{
+				candidates = m_currentPosition.GetNumLegalPositions(color);
+				move = m_currentPosition.GetLegalMoveByIndex(color, rand() % candidates);
+			}
+		}
+		if (!gameEnd)
+		{
+			m_KOCheck[color] = m_currentPosition;
+			m_history.push_back(m_currentPosition);
+			return true;
+		}else
+		{
+			return false;
+		}
+	}
+
 	BitArray64<N> GetCurrentStones(int color)
 	{
 		return m_currentPosition.GetRawStones(color);

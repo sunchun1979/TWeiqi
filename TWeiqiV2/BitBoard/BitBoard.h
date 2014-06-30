@@ -63,6 +63,7 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			m_stones[c] = new TBitArray<N>(*other.m_stones[c]);
+			m_legal[c] = new TBitArray<N>(*other.m_legal[c]);
 			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
 			{
 				m_groups[c].push_back(new TBitGroup(*(*it)));
