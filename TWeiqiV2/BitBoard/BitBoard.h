@@ -11,7 +11,6 @@
 
 using namespace std;
 
-//template<typename TBitArray<N>>
 template <template<int N> class TBitArray, int N>
 class BitBoard
 {
@@ -93,7 +92,18 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			*m_stones[c] = *other.m_stones[c];
+			*m_legal[c] = *other.m_legal[c];
+			/*for(Titer it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
+			{
+				delete *it;
+			}
+			m_groups[c].clear();
+			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
+			{
+				m_groups[c].push_back(new TBitGroup(*(*it)));
+			}*/
 		}
+		*m_emptyStones = *other.m_emptyStones;
 		return *this;
 	}
 
@@ -143,12 +153,12 @@ public:
 		return ret;
 	}
 
-	bool Move(int i, int j, int color, BitBoard* cmp = nullptr)
+	bool Move(int i, int j, int color, const BitBoard* cmp = nullptr)
 	{
 		return Move(GetMove(i,j), color, cmp);
 	}
 
-	bool Move(int move, int color, BitBoard* cmp = nullptr)
+	bool Move(int move, int color, const BitBoard* cmp = nullptr)
 	{
 		TBitGroup* newMerged = new TBitGroup();
 		bool hasMerged;
@@ -160,6 +170,7 @@ public:
 		if(!CheckLegal(move, color, cmp, 
 			newMerged, hasMerged, hasCaptured))
 		{
+			delete newMerged;
 			return false;
 		}
 
@@ -186,6 +197,7 @@ public:
 				capturedStonesAll |= (*(*it))->stones;
 				AddLiberty(capturedNeighbors, (*(*it))->stones);
 				*m_stones[1-color] ^= ((*(*it))->stones);
+				delete *(*it);
 				m_groups[1-color].erase(*it);
 			}
 			*m_emptyStones |= capturedStonesAll;
@@ -285,7 +297,7 @@ public:
 
 public:
 
-	bool CheckLegal(int& move, int& color, BitBoard* cmp,
+	bool CheckLegal(int& move, int& color, const BitBoard* cmp,
 		TBitGroup*& newMerged,
 		bool& hasMerged, bool& hasCaptured
 		)

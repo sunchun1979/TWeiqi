@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-#include "TGame.h"
+#include "Game.h"
 #include "BitBoard.h"
 
 #include "stdafx.h"
@@ -21,7 +21,7 @@ static string ToLower(const string& tmp)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	TGame<9> game;
+	Game<9> game;
 	string commandEx = "";
 	while (commandEx != "exit")
 	{

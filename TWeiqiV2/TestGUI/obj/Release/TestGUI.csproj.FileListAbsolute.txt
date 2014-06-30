@@ -2,8 +2,8 @@ C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\bin\Release\TestGUI.ex
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\bin\Release\TestGUI.exe
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\bin\Release\TestGUI.pdb
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.csprojResolveAssemblyReference.cache
+C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.Form1.resources
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.Properties.Resources.resources
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.csproj.GenerateResource.Cache
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.exe
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.pdb
-C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Release\TestGUI.Form1.resources

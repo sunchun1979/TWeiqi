@@ -1,0 +1,1160 @@
+ X X X X X X X X X 
+ X X X X X X X X X 
+ X X X X . O X X X 
+ X X O O X X X X X 
+ X . X O O X X X X 
+ X X X O O X O . X 
+ X O O O X X X X X 
+ O O O O O X X . X 
+ . O O X X X X X X 
+
+Visual Leak Detector Version 2.4RC2 installed.
+WARNING: Visual Leak Detector detected memory leaks!
+---------- Block 518 at 0x000000000FDC3D40: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    60 3D DC 0F    C4 00 00 00     /....... `=......
+    40 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     @....... ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    90 3D DC 0F    C4 00 00 00     /....... .=......
+    20 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 788 at 0x000000000FDC4060: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 40 DC 0F    C4 00 00 00     /....... .@......
+    00 00 00 00    08 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 40 DC 0F    C4 00 00 00     /....... .@......
+    00 00 00 00    04 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 790 at 0x000000000FDC42E0: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    00 43 DC 0F    C4 00 00 00     /....... .C......
+    00 00 00 00    08 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    30 43 DC 0F    C4 00 00 00     /....... 0C......
+    00 00 00 00    04 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 516 at 0x000000000FDC5AA0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    C0 5A DC 0F    C4 00 00 00     /....... .Z......
+    40 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     @....... ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    F0 5A DC 0F    C4 00 00 00     /....... .Z......
+    20 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 1680 at 0x000000000FDD3BF0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    10 3C DD 0F    C4 00 00 00     /....... .<......
+    00 04 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    40 3C DD 0F    C4 00 00 00     /....... @<......
+    02 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 1682 at 0x000000000FDD3C90: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    B0 3C DD 0F    C4 00 00 00     /....... .<......
+    00 04 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    E0 3C DD 0F    C4 00 00 00     /....... .<......
+    02 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 8294 at 0x000000000FDF0090: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    B0 00 DF 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    00 01 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    E0 00 DF 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 80    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 8292 at 0x000000000FDF1030: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    50 10 DF 0F    C4 00 00 00     /....... P.......
+    00 00 00 00    00 00 00 00    00 01 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 10 DF 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 80    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6687 at 0x000000000FDFE6B0: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    D0 E6 DF 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 40    C0 00 01 00    00 00 00 00     .......@ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    00 E7 DF 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 20    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6682 at 0x000000000FDFF010: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    30 F0 DF 0F    C4 00 00 00     /....... 0.......
+    60 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     `....... ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    60 F0 DF 0F    C4 00 00 00     /....... `.......
+    10 40 00 00    00 00 00 00    00 00 00 00    00 00 00 00     .@...... ........
+
+
+---------- Block 6681 at 0x000000000FDFF470: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    90 F4 DF 0F    C4 00 00 00     /....... ........
+    04 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    C0 F4 DF 0F    C4 00 00 00     /....... ........
+    0A 08 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6684 at 0x000000000FDFF510: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    30 F5 DF 0F    C4 00 00 00     /....... 0.......
+    00 00 00 00    00 00 00 40    C0 00 01 00    00 00 00 00     .......@ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    60 F5 DF 0F    C4 00 00 00     /....... `.......
+    00 00 00 00    00 00 00 20    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 3958 at 0x000000000FE066D0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    F0 66 E0 0F    C4 00 00 00     /....... .f......
+    00 00 00 00    00 00 00 04    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    20 67 E0 0F    C4 00 00 00     /....... .g......
+    00 00 00 00    00 00 00 00    08 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 3960 at 0x000000000FE07D50: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    70 7D E0 0F    C4 00 00 00     /....... p}......
+    00 00 00 00    00 00 00 04    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    A0 7D E0 0F    C4 00 00 00     /....... .}......
+    00 00 00 00    00 00 00 00    08 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 8248 at 0x000000000FE08C50: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    70 8C E0 0F    C4 00 00 00     /....... p.......
+    00 00 00 00    20 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    A0 8C E0 0F    C4 00 00 00     /....... ........
+    00 00 00 00    40 00 00 00    00 00 00 00    00 00 00 00     ....@... ........
+
+
+---------- Block 4216 at 0x000000000FE09010: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    30 90 E0 0F    C4 00 00 00     /....... 0.......
+    00 00 00 00    00 00 40 00    00 00 00 00    00 00 00 00     ......@. ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    60 90 E0 0F    C4 00 00 00     /....... `.......
+    00 00 00 00    00 00 00 80    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 8246 at 0x000000000FE0A690: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 A6 E0 0F    C4 00 00 00     /....... ........
+    00 00 00 00    20 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 A6 E0 0F    C4 00 00 00     /....... ........
+    00 00 00 00    40 00 00 00    00 00 00 00    00 00 00 00     ....@... ........
+
+
+---------- Block 4214 at 0x000000000FE0B130: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    50 B1 E0 0F    C4 00 00 00     /....... P.......
+    00 00 00 00    00 00 40 00    00 00 00 00    00 00 00 00     ......@. ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 B1 E0 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 80    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 5060 at 0x000000000FE17290: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 72 E1 0F    C4 00 00 00     /....... .r......
+    00 00 00 00    00 00 00 00    00 40 00 00    00 00 00 00     ........ .@......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 72 E1 0F    C4 00 00 00     /....... .r......
+    00 00 00 00    00 00 00 00    00 80 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 5062 at 0x000000000FE17510: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    30 75 E1 0F    C4 00 00 00     /....... 0u......
+    00 00 00 00    00 00 00 00    00 40 00 00    00 00 00 00     ........ .@......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    60 75 E1 0F    C4 00 00 00     /....... `u......
+    00 00 00 00    00 00 00 00    00 80 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6512 at 0x000000000FE2C790: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 C7 E2 0F    C4 00 00 00     /....... ........
+    00 00 04 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 C7 E2 0F    C4 00 00 00     /....... ........
+    00 02 08 08    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6764 at 0x000000000FE2FE90: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 FE E2 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    07 02 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 FE E2 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    08 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6767 at 0x000000000FE32190: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    B0 21 E3 0F    C4 00 00 00     /....... .!......
+    00 00 00 00    00 00 00 00    07 02 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    E0 21 E3 0F    C4 00 00 00     /....... .!......
+    00 00 00 00    00 00 00 00    08 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 6136 at 0x000000000FE32370: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    90 23 E3 0F    C4 00 00 00     /....... .#......
+    60 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     `....... ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    C0 23 E3 0F    C4 00 00 00     /....... .#......
+    10 40 00 00    00 00 00 00    00 00 00 00    00 00 00 00     .@...... ........
+
+
+---------- Block 7525 at 0x000000000FE38CA0: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    C0 8C E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    C0 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    F0 8C E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    00 00 01 00    00 00 00 00     ........ ........
+
+
+---------- Block 7456 at 0x000000000FE39C40: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    60 9C E3 0F    C4 00 00 00     /....... `.......
+    00 00 00 00    00 00 00 00    00 02 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    90 9C E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    01 05 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7521 at 0x000000000FE3B900: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    20 B9 E3 0F    C4 00 00 00     /....... ........
+    04 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    50 B9 E3 0F    C4 00 00 00     /....... P.......
+    0A 08 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7522 at 0x000000000FE3B9A0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    C0 B9 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    C0 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    F0 B9 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    00 00 01 00    00 00 00 00     ........ ........
+
+
+---------- Block 7648 at 0x000000000FE3CC60: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 CC E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    40 00 00 00    00 00 00 00     ........ @.......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 CC E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    80 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7772 at 0x000000000FE3DB60: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 DB E3 0F    C4 00 00 00     /....... ........
+    60 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     `....... ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 DB E3 0F    C4 00 00 00     /....... ........
+    10 40 00 00    00 00 00 00    00 00 00 00    00 00 00 00     .@...... ........
+
+
+---------- Block 7882 at 0x000000000FE3DDE0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    00 DE E3 0F    C4 00 00 00     /....... ........
+    00 00 04 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    30 DE E3 0F    C4 00 00 00     /....... 0.......
+    00 02 08 08    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7935 at 0x000000000FE3E2E0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    00 E3 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    00 02 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    30 E3 E3 0F    C4 00 00 00     /....... 0.......
+    00 00 00 00    00 00 00 00    01 05 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7936 at 0x000000000FE3E380: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    A0 E3 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 04    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    D0 E3 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 02 0A    08 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7937 at 0x000000000FE3E4C0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 E4 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    02 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    10 E5 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 01    05 04 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 7650 at 0x000000000FE3E560: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    80 E5 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    40 00 00 00    00 00 00 00     ........ @.......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    B0 E5 E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    80 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 8080 at 0x000000000FE3E9C0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 E9 E3 0F    C4 00 00 00     /....... ........
+    00 00 F0 E0    E0 E5 DB 9B    1F 0F 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    10 EA E3 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 04    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 8083 at 0x000000000FE3EE20: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    40 EE E3 0F    C4 00 00 00     /....... @.......
+    00 00 F0 E0    E0 E5 DB 9B    1F 0F 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    70 EE E3 0F    C4 00 00 00     /....... p.......
+    00 00 00 00    00 00 00 04    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 9665 at 0x000000000FE50060: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 00 E5 0F    C4 00 00 00     /....... ........
+    00 00 C0 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 00 E5 0F    C4 00 00 00     /....... ........
+    00 20 20 80    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 9795 at 0x000000000FE52860: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    80 28 E5 0F    C4 00 00 00     /....... .(......
+    00 00 00 00    00 00 00 00    40 00 00 00    00 00 00 00     ........ @.......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    B0 28 E5 0F    C4 00 00 00     /....... .(......
+    00 00 00 00    00 00 00 20    A0 80 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 9918 at 0x000000000FE53B20: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    40 3B E5 0F    C4 00 00 00     /....... @;......
+    00 00 C0 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    70 3B E5 0F    C4 00 00 00     /....... p;......
+    00 20 20 80    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10160 at 0x000000000FE54020: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    40 40 E5 0F    C4 00 00 00     /....... @@......
+    00 00 00 00    00 00 00 00    00 01 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    70 40 E5 0F    C4 00 00 00     /....... p@......
+    00 00 00 00    00 00 00 80    00 02 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10279 at 0x000000000FE55880: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    A0 58 E5 0F    C4 00 00 00     /....... .X......
+    00 00 00 00    20 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    D0 58 E5 0F    C4 00 00 00     /....... .X......
+    00 00 00 10    50 40 00 00    00 00 00 00    00 00 00 00     ....P@.. ........
+
+
+---------- Block 10274 at 0x000000000FE55920: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    40 59 E5 0F    C4 00 00 00     /....... @Y......
+    00 00 00 00    00 00 00 00    40 00 00 00    00 00 00 00     ........ @.......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    70 59 E5 0F    C4 00 00 00     /....... pY......
+    00 00 00 00    00 00 00 20    A0 80 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10235 at 0x000000000FE55EC0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    E0 5E E5 0F    C4 00 00 00     /....... .^......
+    00 00 00 00    00 00 00 00    00 01 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    10 5F E5 0F    C4 00 00 00     /....... ._......
+    00 00 00 00    00 00 00 80    00 02 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10275 at 0x000000000FE560A0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    C0 60 E5 0F    C4 00 00 00     /....... .`......
+    00 00 00 60    80 01 83 83    0F 07 00 00    00 00 00 00     ...`.... ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    F0 60 E5 0F    C4 00 00 00     /....... .`......
+    00 00 00 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10197 at 0x000000000FE56140: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    60 61 E5 0F    C4 00 00 00     /....... `a......
+    00 00 00 00    00 00 00 00    40 00 00 00    00 00 00 00     ........ @.......
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    90 61 E5 0F    C4 00 00 00     /....... .a......
+    00 00 00 00    00 00 00 20    A0 80 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10277 at 0x000000000FE56A00: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    20 6A E5 0F    C4 00 00 00     /....... .j......
+    00 00 C0 00    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    50 6A E5 0F    C4 00 00 00     /....... Pj......
+    00 20 20 80    00 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10272 at 0x000000000FE57400: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    20 74 E5 0F    C4 00 00 00     /....... .t......
+    00 00 00 00    00 00 18 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    50 74 E5 0F    C4 00 00 00     /....... Pt......
+    00 00 00 00    00 08 20 20    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 10198 at 0x000000000FE57720: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    40 77 E5 0F    C4 00 00 00     /....... @w......
+    00 00 00 00    20 00 00 00    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    70 77 E5 0F    C4 00 00 00     /....... pw......
+    00 00 00 10    50 40 00 00    00 00 00 00    00 00 00 00     ....P@.. ........
+
+
+---------- Block 9114 at 0x000000000FE5E200: 96 bytes ----------
+  Leak Hash: 0x4A6C2ED8, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (101): ConsoleTester.exe!Game<9>::PlayFromCurrent + 0x2F bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (116): ConsoleTester.exe!Game<9>::ComputerPlay
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    20 E2 E5 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    01 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CC CC CC CC    50 E2 E5 0F    C4 00 00 00     /....... P.......
+    00 00 00 00    00 00 00 80    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 9112 at 0x000000000FE5EE80: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    A0 EE E5 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 00    01 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    D0 EE E5 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 80    00 00 00 00    00 00 00 00     ........ ........
+
+
+---------- Block 9290 at 0x000000000FE5F6A0: 96 bytes ----------
+  Leak Hash: 0x513C3589, Count: 1, Total 96 bytes
+  Call Stack (TID 8336):
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\new.cpp (57): MSVCR110D.dll!operator new
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\bitboard\bitboard.h (163): ConsoleTester.exe!BitBoard<BitArray64,9>::Move + 0xA bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\player\playerrandom.h (18): ConsoleTester.exe!PlayerRandom<BitBoard<BitArray64,9> >::Play + 0x31 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\game\game.h (112): ConsoleTester.exe!Game<9>::ComputerPlay + 0x4C bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (72): ConsoleTester.exe!GameDriver<9> + 0x11 bytes
+    c:\users\chunsun\documents\github\tweiqi\tweiqiv2\consoletester\consoletester.cpp (128): ConsoleTester.exe!wmain
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (533): ConsoleTester.exe!__tmainCRTStartup + 0x19 bytes
+    f:\dd\vctools\crt_bld\self_64_amd64\crt\src\crtexe.c (377): ConsoleTester.exe!wmainCRTStartup
+    0x00000000E01416AD (File and line number not available): KERNEL32.DLL!BaseThreadInitThunk + 0xD bytes
+    0x00000000E20F4629 (File and line number not available): ntdll.dll!RtlUserThreadStart + 0x1D bytes
+  Data:
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    C0 F6 E5 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 00 08    00 00 00 00    00 00 00 00     ........ ........
+    51 00 00 00    02 00 00 00    FF FF 01 00    00 00 00 00     Q....... ........
+    2F 00 00 00    CD CD CD CD    F0 F6 E5 0F    C4 00 00 00     /....... ........
+    00 00 00 00    00 00 04 14    10 00 00 00    00 00 00 00     ........ ........
+
+
+Visual Leak Detector detected 52 memory leaks (7696 bytes).
+Largest number used: 629026 bytes.
+Total allocations: 1129011 bytes.
+Visual Leak Detector is now exiting.

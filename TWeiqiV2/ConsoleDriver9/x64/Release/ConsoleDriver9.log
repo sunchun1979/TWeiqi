@@ -1,16 +1,17 @@
-﻿Build started 6/29/2014 12:38:45 AM.
-     1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\ConsoleDriver9\ConsoleDriver9.vcxproj" on node 2 (Build target(s)).
+﻿Build started 6/30/2014 2:30:39 PM.
+     1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\ConsoleDriver9\ConsoleDriver9.vcxproj" on node 4 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I..\TGame /I..\BitBoard /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt ConsoleDriver9.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /I..\Game /I..\BitBoard /I..\Player /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt ConsoleDriver9.cpp stdafx.cpp
          ConsoleDriver9.cpp
+         stdafx.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.lib" /MACHINE:X64 x64\Release\ConsoleDriver9.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win64" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.lib" /MACHINE:X64 x64\Release\ConsoleDriver9.obj
          x64\Release\stdafx.obj
          Generating code
          Finished generating code
          ConsoleDriver9.vcxproj -> C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\ConsoleDriver9.exe
-     1>Done Building Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\ConsoleDriver9\ConsoleDriver9.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\ConsoleDriver9\ConsoleDriver9.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.24
+Time Elapsed 00:00:03.13
