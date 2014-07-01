@@ -85,9 +85,9 @@ void PerformanceTest()
 	start = std::clock();
 	for (int i = 0; i < 1000; i++)
 	{
-		GameDriver<19>(false);
+		OneGameFull<19>(false);
 	}
-	GameDriver<19>(true);
+	OneGameFull<19>(true);
 	//cout << "trial = " << trial << endl;
 	std::clock_t end = std::clock();
 	std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
@@ -126,7 +126,8 @@ void ManualGame9()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	PerformanceTest();
+	//PerformanceTest();
+	GameDriver<9>(true);
 	return 0;
 }
 

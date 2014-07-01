@@ -11,6 +11,8 @@
 
 using namespace std;
 
+typedef vector<uint64_t> TVKey;
+
 template <template<int N> class TBitArray, int N>
 class BitBoard
 {
@@ -71,7 +73,7 @@ public:
 		m_emptyStones = new TBitArray<N>(*other.m_emptyStones);
 	}
 
-	~BitBoard()
+	virtual ~BitBoard()
 	{
 		for (int c = 0; c < 2; c++)
 		{
@@ -92,8 +94,19 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			*m_stones[c] = *other.m_stones[c];
+		}
+		//*m_emptyStones = *other.m_emptyStones;
+		return *this;
+	}
+
+	BitBoard& Clone(const BitBoard& other)
+	{
+		m_Size = other.m_Size;
+		for (int c = 0; c < 2; c++)
+		{
+			*m_stones[c] = *other.m_stones[c];
 			*m_legal[c] = *other.m_legal[c];
-			/*for(Titer it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
+			for(Titer it = m_groups[c].begin(); it != m_groups[c].end(); ++it)
 			{
 				delete *it;
 			}
@@ -101,7 +114,7 @@ public:
 			for(TCiter it = other.m_groups[c].begin(); it != other.m_groups[c].end(); ++it)
 			{
 				m_groups[c].push_back(new TBitGroup(*(*it)));
-			}*/
+			}
 		}
 		*m_emptyStones = *other.m_emptyStones;
 		return *this;
@@ -261,6 +274,20 @@ public:
 	const TBitArray<N> GetRawStones(int color)
 	{
 		return *m_stones[color];
+	}
+
+	const void AssignRawVector(TVKey& vec) const
+	{
+		int t = m_stones[0]->GetArrayLength();
+		vec.resize(t*2);
+		for (int i = 0; i < t; i++)
+		{
+			vec[i] = * (m_stones[0]->GetArray() + i);
+		}
+		for (int i = 0; i < m_stones[1]->GetArrayLength(); i++)
+		{
+			vec[i + t] = * (m_stones[1]->GetArray() + i);
+		}
 	}
 
 	/*

@@ -30,6 +30,12 @@
     <ClInclude Include="PlayerRandom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerUCT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UCTNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

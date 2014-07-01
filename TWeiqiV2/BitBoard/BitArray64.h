@@ -1,5 +1,6 @@
 #include <bitset>
 #include <string>
+#include <stdint.h>
 #include <sstream>
 #include <memory>
 #include <vld.h>
@@ -32,7 +33,7 @@ public:
 		m_lastInt64Mask = (0xFFFFFFFFFFFFFFFF >> m_bitInt64Diff);
 	}
 
-	~BitArray64Base(void)
+	virtual ~BitArray64Base()
 	{
 	}
 
@@ -72,6 +73,16 @@ public:
 			}
 		}
 		return ss.str();
+	}
+
+	const uint64_t* GetArray() const
+	{
+		return m_bits;
+	}
+
+	const int GetArrayLength() const
+	{
+		return m_int64Length;
 	}
 
 	void SetAll(bool flag)
@@ -277,14 +288,15 @@ class BitArray64 : public BitArray64Base
 {
 private:
 	uint64_t m_myBits[((N*N)>>6)+1];
+	//vector<uint64_t> m_myBits(((N*N)>>6)+1);
 public:
-	BitArray64() : BitArray64Base(N*N, ((N*N)>>6)+1, m_myBits)
+	BitArray64() : BitArray64Base(N*N, ((N*N)>>6)+1, &m_myBits[0])
 	{
 	}
 
-	BitArray64(uint64_t* t) : BitArray64Base(N*N, ((N*N)>>6)+1, m_myBits)
+	BitArray64(uint64_t* t) : BitArray64Base(N*N, ((N*N)>>6)+1, &m_myBits[0])
 	{
-		memcpy(m_myBits, t, sizeof(uint64_t)*(((N*N)>>6)+1));
+		memcpy(&m_myBits[0], t, sizeof(uint64_t)*(((N*N)>>6)+1));
 	}
 
 	~BitArray64()
@@ -298,8 +310,8 @@ public:
 	BitArray64& operator = (const BitArray64& other)
 	{
 		BitArray64Base::operator=(other);
-		memcpy(m_myBits, other.m_myBits, sizeof(uint64_t)*(((N*N)>>6)+1));
-		m_bits = m_myBits;
+		memcpy(&m_myBits[0], &other.m_myBits[0], sizeof(uint64_t)*(((N*N)>>6)+1));
+		m_bits = &m_myBits[0];
 		return *this;
 	}
 

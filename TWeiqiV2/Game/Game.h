@@ -7,6 +7,7 @@
 
 #include "BitBoard.h"
 #include "PlayerRandom.h"
+#include "PlayerUCT.h"
 
 #pragma once
 
@@ -26,7 +27,7 @@ private:
 public:
 	Game()
 	{
-		computerPlayer = new PlayerRandom<TBoard>(m_currentPosition);
+		computerPlayer = new PlayerUCT<TBoard>(m_currentPosition);
 	}
 
 	~Game()

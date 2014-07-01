@@ -7,7 +7,7 @@ class PlayerBase
 {
 public:
 	PlayerBase() {}
-	~PlayerBase() {}
+	virtual ~PlayerBase() {}
 
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2) = 0;
 

@@ -74,6 +74,9 @@
     <Report>
       <Path>ConsoleTester140630(1).vspx</Path>
     </Report>
+    <Report>
+      <Path>ConsoleTester140701.vspx</Path>
+    </Report>
   </Reports>
   <Launches>
     <ProjBinary>
