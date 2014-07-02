@@ -6,9 +6,8 @@ template <typename TBoard>
 class PlayerRandom : public PlayerBase<TBoard>
 {
 public:
-	PlayerRandom(TBoard board)
+	PlayerRandom(TBoard board, int color) : PlayerBase<TBoard>(board, color)
 	{
-		m_currentPosition = board;
 	}
 
 	~PlayerRandom() {}

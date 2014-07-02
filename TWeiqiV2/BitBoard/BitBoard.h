@@ -290,6 +290,30 @@ public:
 		}
 	}
 
+	bool FinalCheckBlack()
+	{
+		int count[2] = {0, 0};
+		for (int color = 0; color < 2; color++)
+		{
+			for (auto it = m_groups[color].begin(); it != m_groups[color].end(); ++it)
+			{
+				if ((*it)->liberty.GetNumOfOnes() > 1)
+				{
+					count[color] += (*it)->stones.GetNumOfOnes();
+				}else
+				{
+					count[1-color] += (*it)->stones.GetNumOfOnes();
+				}
+			}
+		}
+		return count[0] > count[1];
+	}
+
+	int GetMove(int i, int j)
+	{
+		return i*N + j;
+	}
+
 	/*
 	The following function is too expensive, resulting more move numbers to the end.
 	bool EndGameCheckComplex()
@@ -322,7 +346,7 @@ public:
 	}
 	*/
 
-public:
+private:
 
 	bool CheckLegal(int& move, int& color, const BitBoard* cmp,
 		TBitGroup*& newMerged,
@@ -407,11 +431,6 @@ public:
 				return true;
 		}
 		return false;
-	}
-
-	int GetMove(int i, int j)
-	{
-		return i*N + j;
 	}
 
 	void AddLiberty(TBitArray<N>& liberty, TBitArray<N>& stones)

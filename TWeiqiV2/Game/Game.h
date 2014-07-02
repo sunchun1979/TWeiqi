@@ -22,17 +22,17 @@ private:
 	TBoard m_KOCheck[2];
 	list<TBoard> m_history;
 
-	PlayerBase<TBoard>* computerPlayer;
+	PlayerBase<TBoard>* m_computerPlayer;
 
 public:
 	Game()
 	{
-		computerPlayer = new PlayerUCT<TBoard>(m_currentPosition);
+		m_computerPlayer = new PlayerRandom<TBoard>(m_currentPosition, BLACK);
 	}
 
 	~Game()
 	{
-		delete computerPlayer;
+		delete m_computerPlayer;
 	}
 
 	void LoadSGF(string filename)
@@ -110,7 +110,7 @@ public:
 
 	bool ComputerPlay(int color)
 	{
-		int move = computerPlayer->Play(color, m_KOCheck);
+		int move = m_computerPlayer->Play(color, m_KOCheck);
 		if (move >= 0)
 		{
 			PlayFromCurrent(move, color);

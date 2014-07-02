@@ -60,21 +60,24 @@ void OneGameFull(bool print)
 	}
 }
 
-// this is very slow
+// this is very slow because of extra copies in Game class
 template <int N>
-void GameDriver(bool print)
+void GameDriver(bool print, int finalCount)
 {
 	Game<N> g;
 	int c = BLACK;
+	int moveCount = 0;
 	bool finish = false;
 	do
 	{
 		finish = !g.ComputerPlay(c);
+		moveCount++;
 		c = 1 - c;
-	} while (!finish);
+	} while ( (!finish) && (moveCount < finalCount) );
 	if (print)
 	{
 		cout << g.GetCurrentBoard().ToString() << endl;
+		cout << g.GetCurrentBoard().FinalCheckBlack() << endl;
 	}
 }
 
@@ -126,8 +129,9 @@ void ManualGame9()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	srand(0);
 	//PerformanceTest();
-	GameDriver<9>(true);
+	GameDriver<9>(true, 500);
 	return 0;
 }
 
