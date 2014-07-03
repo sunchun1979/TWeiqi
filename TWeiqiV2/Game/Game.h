@@ -131,7 +131,7 @@ public:
 		throw new exception("not implmented");
 	}
 
-	TBoard GetCurrentBoard()
+	TBoard& GetCurrentBoard()
 	{
 		return m_currentPosition;
 	}

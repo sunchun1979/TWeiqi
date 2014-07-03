@@ -77,7 +77,9 @@ void GameDriver(bool print, int finalCount)
 	if (print)
 	{
 		cout << g.GetCurrentBoard().ToString() << endl;
-		cout << g.GetCurrentBoard().FinalCheckBlack() << endl;
+		auto p = g.GetCurrentBoard();
+		cout << "est " << endl;
+		cout << p.EstimateCheck(p, nullptr, nullptr) << endl;
 	}
 }
 
@@ -131,6 +133,8 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(0);
 	//PerformanceTest();
+	BitBoard<BitArray64, 19> b;
+	cout << BitBoard<BitArray64, 19>::EstimateCheck(b, nullptr, nullptr) << endl;
 	GameDriver<9>(true, 500);
 	return 0;
 }

@@ -309,9 +309,79 @@ public:
 		return count[0] > count[1];
 	}
 
-	int GetMove(int i, int j)
+	static int EstimateCheck(const BitBoard& board, TBitArray<N>* blackEst, TBitArray<N>* whiteEst)
+	{
+		TBitArray<N> estimates[2];
+		TBitArray<N> libTemp, estTemp;
+		estimates[0] = *board.m_stones[0];
+		estimates[1] = *board.m_stones[1];
+		for (int c = 0; c < 2; c++)
+		{
+			for (auto it = board.m_groups[c].begin(); it != board.m_groups[c].end(); ++it)
+			{
+				if ((*it)->liberty.GetNumOfOnes() > 1)
+				{
+					estimates[1-c] |= (*it)->stones;
+					estimates[c].XorTrue((*it)->stones);
+				}
+			}
+		}
+		for (int c = 0; c < 2; c++)
+		{
+			estTemp.SetAll(false);
+			for (int i = 0; i < N*N; i++)
+			{
+				if (estimates[c].Get(i))
+				{
+					GetLiberty(&libTemp, i);
+					estTemp |= libTemp;
+				}
+			}
+			estTemp.XorTrue(*board.m_stones[1-c]);
+			estimates[c] |= estTemp;
+		}
+		if (blackEst != nullptr)
+		{
+			*blackEst = estimates[0];
+		}
+		if (whiteEst != nullptr)
+		{
+			*whiteEst = estimates[1];
+		}
+		return estimates[0].GetNumOfOnes() - estimates[1].GetNumOfOnes();
+	}
+
+	static int GetMove(int i, int j)
 	{
 		return i*N + j;
+	}
+
+	static void GetLiberty(TBitArray<N>* liberty, int move)
+	{
+		if(N==19)
+			*liberty |= LibertyConst64_19[move];
+		else
+			GetLibertyGeneric(liberty, move);
+	}
+
+	static void GetLibertyGeneric(TBitArray<N>* liberty, int move)
+	{
+		if (move >= N)
+		{
+			liberty->Set1(move - N);
+		}
+		if (move + N < N*N)
+		{
+			liberty->Set1(move + N);
+		}
+		if (move % N > 0) // to optimize with bit op
+		{
+			liberty->Set1(move - 1);
+		}
+		if (move % N < N - 1)
+		{
+			liberty->Set1(move + 1);
+		}
 	}
 
 	/*
@@ -452,34 +522,6 @@ private:
 					GetLiberty(&liberty, i);
 				}
 			}
-		}
-	}
-
-	void GetLiberty(TBitArray<N>* liberty, int move)
-	{
-		if(N==19)
-			*liberty |= LibertyConst64_19[move];
-		else
-			GetLibertyGeneric(liberty, move);
-	}
-
-	void GetLibertyGeneric(TBitArray<N>* liberty, int move)
-	{
-		if (move >= N)
-		{
-			liberty->Set1(move - N);
-		}
-		if (move + N < N*N)
-		{
-			liberty->Set1(move + N);
-		}
-		if (move % N > 0) // to optimize with bit op
-		{
-			liberty->Set1(move - 1);
-		}
-		if (move % N < N - 1)
-		{
-			liberty->Set1(move + 1);
 		}
 	}
 
