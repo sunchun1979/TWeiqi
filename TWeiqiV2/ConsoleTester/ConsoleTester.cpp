@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include <vld.h>
+//#include <vld.h>
 
 #pragma region PerformanceTest
 
@@ -133,9 +133,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(0);
 	//PerformanceTest();
-	BitBoard<BitArray64, 19> b;
-	cout << BitBoard<BitArray64, 19>::EstimateCheck(b, nullptr, nullptr) << endl;
-	GameDriver<9>(true, 500);
+	GameDriver<9>(true, 4);
 	return 0;
 }
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <deque>
+#include <array>
 #include <vector>
 
 #include "BitArray.h"
@@ -313,32 +314,81 @@ public:
 	{
 		TBitArray<N> estimates[2];
 		TBitArray<N> libTemp, estTemp;
-		estimates[0] = *board.m_stones[0];
-		estimates[1] = *board.m_stones[1];
 		for (int c = 0; c < 2; c++)
 		{
+			estimates[c] = *board.m_stones[c];
 			for (auto it = board.m_groups[c].begin(); it != board.m_groups[c].end(); ++it)
 			{
-				if ((*it)->liberty.GetNumOfOnes() > 1)
+				if ((*it)->liberty.GetNumOfOnes() == 1)
 				{
 					estimates[1-c] |= (*it)->stones;
 					estimates[c].XorTrue((*it)->stones);
 				}
 			}
 		}
+		int32_t initInf = 0xFFFF;
+		const int PATHN = 16;
+		array<int32_t, N*N> influence[2];
 		for (int c = 0; c < 2; c++)
 		{
-			estTemp.SetAll(false);
+			influence[c].fill(0);
 			for (int i = 0; i < N*N; i++)
 			{
 				if (estimates[c].Get(i))
 				{
-					GetLiberty(&libTemp, i);
-					estTemp |= libTemp;
+					influence[c][i] = initInf;
 				}
 			}
-			estTemp.XorTrue(*board.m_stones[1-c]);
-			estimates[c] |= estTemp;
+
+			int32_t currentInf = initInf;
+			for (int p = 0; p < PATHN; p++)
+			{
+				estTemp.SetAll(false);
+				libTemp.SetAll(false);
+				for (int i = 0; i < N*N; i++)
+				{
+					if (estimates[c].Get(i))
+					{
+						GetLiberty(&libTemp, i);
+						estTemp |= libTemp;
+					}
+				}
+				estTemp.XorTrue(*board.m_stones[1-c]);
+
+				for (int i = 0; i < N*N; i++)
+				{
+					if (estTemp.Get(i))
+					{
+						influence[c][i] += currentInf;
+					}
+				}
+				currentInf = currentInf >> 1;
+				estimates[c] |= estTemp;
+			}
+		}
+		for (int i = 0; i < N*N; i++)
+		{
+			//if (influence[1][i] > 0)
+			//{
+			//	estimates[1].Set1(i);
+			//}else
+			//{
+			//	estimates[1].Set0(i);
+			//}
+			//estimates[0].Set0(i);
+			if (influence[0][i] > influence[1][i])
+			{
+				estimates[0].Set1(i);
+				estimates[1].Set0(i);
+			}else if (influence[0][i] < influence[1][i])
+			{
+				estimates[0].Set0(i);
+				estimates[1].Set1(i);
+			}else
+			{
+				estimates[0].Set0(i);
+				estimates[1].Set0(i);
+			}
 		}
 		if (blackEst != nullptr)
 		{

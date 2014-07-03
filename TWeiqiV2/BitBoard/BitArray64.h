@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <sstream>
 #include <memory>
-#include <vld.h>
 
 #pragma once
 

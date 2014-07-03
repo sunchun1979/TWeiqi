@@ -21,17 +21,24 @@ namespace TestGUI
             public int size;
             public Process engine;
 
+            public BitBoardG blackEst;
+            public BitBoardG whiteEst;
+
             public DBoard(int _size)
             {
                 size = _size;
                 blackStones = new BitBoardG(size);
                 whiteStones = new BitBoardG(size);
 
+                blackEst = new BitBoardG(size);
+                whiteEst = new BitBoardG(size);
+
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.UseShellExecute = false;
                 startInfo.RedirectStandardInput = true;
                 startInfo.RedirectStandardOutput = true;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                startInfo.CreateNoWindow = true;
+                //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 if (size == 19)
                 {
                     startInfo.FileName = @"..\..\..\x64\Release\ConsoleDriver.exe";
@@ -107,6 +114,8 @@ namespace TestGUI
             // Painting the stones
             DrawStone(G, db.blackStones, new Bitmap(TestGUI.Properties.Resources._24));
             DrawStone(G, db.whiteStones, new Bitmap(TestGUI.Properties.Resources._24_2));
+            MarkStonePosition(G, db.blackEst, Color.Blue, Color.White);
+            MarkStonePosition(G, db.whiteEst, Color.Red, Color.Black);
             myBuffer.Render();
             myBuffer.Render(panel.CreateGraphics());
         }
@@ -200,6 +209,20 @@ namespace TestGUI
                 rawStones = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
                 board[1].whiteStones.LoadFrom(rawStones);
             }
+            paintBoard(panel2, board[1]);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            board[1].engine.StandardInput.WriteLine("getestimate");
+            string ret = board[1].engine.StandardOutput.ReadLine();
+            this.Text = ret;
+            ret = board[1].engine.StandardOutput.ReadLine();
+            var rawEstimate = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
+            board[1].blackEst.LoadFrom(rawEstimate);
+            ret = board[1].engine.StandardOutput.ReadLine();
+            rawEstimate = ret.Split(',').Select(n => Convert.ToUInt64(n)).ToArray();
+            board[1].whiteEst.LoadFrom(rawEstimate);
             paintBoard(panel2, board[1]);
         }
     }

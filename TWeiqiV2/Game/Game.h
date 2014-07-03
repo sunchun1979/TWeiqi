@@ -23,6 +23,7 @@ private:
 	list<TBoard> m_history;
 
 	PlayerBase<TBoard>* m_computerPlayer;
+	BitArray64<N> m_currentEst[2];
 
 public:
 	Game()
@@ -126,9 +127,10 @@ public:
 		return m_currentPosition.GetRawStones(color);
 	}
 
-	BitArray64<N> GetCurrentEst(int color)
+	BitArray64<N>* GetCurrentEst(int& diff)
 	{
-		throw new exception("not implmented");
+		diff = m_currentPosition.EstimateCheck(m_currentPosition, &m_currentEst[0], &m_currentEst[1]);
+		return m_currentEst;
 	}
 
 	TBoard& GetCurrentBoard()

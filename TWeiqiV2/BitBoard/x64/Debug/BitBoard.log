@@ -1,4 +1,4 @@
-﻿Build started 7/3/2014 12:16:05 AM.
+﻿Build started 7/3/2014 9:58:48 AM.
      1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\BitBoard\BitBoard.vcxproj" on node 2 (Build target(s)).
      1>Link:
          BitBoard.vcxproj -> C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Debug\BitBoard.dll
@@ -6,4 +6,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.04
+Time Elapsed 00:00:00.03

@@ -47,7 +47,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			auto current = game.GetCurrentStones(stoi(args[0]));
 			cout << current.ToString() << endl;
-		}else if (prefix == "loadsgf")
+		}else if (prefix == "getestimate")
+		{
+			int diff;
+			auto currentEst = game.GetCurrentEst(diff);
+			cout << diff << endl;
+			cout << currentEst[0].ToString() << endl;
+			cout << currentEst[1].ToString() << endl;
+		}
+		else if (prefix == "loadsgf")
 		{
 			game.LoadSGF(args[0]);
 			cout << "done" << endl;
