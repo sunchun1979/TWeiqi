@@ -67,6 +67,11 @@ public:
 
 	virtual double DefaultPolicy(TNode* node)
 	{
+		return PlayOut(node);
+	}
+
+	static int PlayOut(TNode* node)
+	{
 		int color = node->GetColor();
 		PlayerRandom<TBoard> randPlayer(node->GetBoard(), color);
 		TBoard m_KOCheck[2];
@@ -86,10 +91,16 @@ public:
 		}
 	}
 
+	virtual void Backup(TNode* leafNode, double delta)
+	{
+
+	}
+
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
 	{
-		TreePolicy(m_root);
-		return m_root->BestMove();
+		TNode* candidateNode = TreePolicy(m_root);
+		double delta = DefaultPolicy(candidateNode);
+		Backup(candidateNode, delta);
 		//// Random play
 		//int candidates = m_currentPosition.GetNumLegalPositions(color);
 		//int move = m_currentPosition.GetLegalMoveByIndex(color, rand() % candidates);

@@ -16,8 +16,6 @@ class UCTNode
 private:
 	TBoard m_board;
 	int m_color;
-	uint64_t m_N;
-	double m_Q;
 
 	TVKey m_key;
 	list<UCTNode*> m_parents;
@@ -27,6 +25,9 @@ private:
 	list<int> m_legalMoves;
 
 public:
+	uint64_t m_N;
+	double m_Q;
+
 	UCTNode(TBoard b, int c) : m_board(b), m_color(c), m_N(0), m_Q(0)
 	{
 	}

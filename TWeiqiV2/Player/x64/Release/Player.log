@@ -1,4 +1,4 @@
-﻿Build started 8/1/2014 2:25:48 PM.
+﻿Build started 8/1/2014 3:25:07 PM.
      1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\Player\Player.vcxproj" on node 2 (Build target(s)).
      1>Link:
          Player.vcxproj -> C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\Player.dll
@@ -6,4 +6,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.04
+Time Elapsed 00:00:00.07
