@@ -3,6 +3,8 @@
 #include <list>
 #include <map>
 #include <vector>
+#include <limits>
+#include <utility>
 
 #include "BitBoard.h"
 
@@ -20,6 +22,7 @@ private:
 	TVKey m_key;
 	list<UCTNode*> m_parents;
 	map<int, UCTNode*> m_children;
+	pair<int, UCTNode*> m_currentBestChild;
 
 	list<int> m_legalMoves;
 
@@ -75,12 +78,22 @@ public:
 
 	UCTNode* BestChild()
 	{
-		return m_children.begin()->second;
+		double bestUCT = std::numeric_limits<double>::min();
+		for (auto child : m_children)
+		{
+			double cUCT = GetUCT(m_N, 0.717);
+			if (cUCT > bestUCT)
+			{
+				bestUCT = cUCT;
+				m_currentBestChild = child;
+			}
+		}
+		return m_currentBestChild.second;
 	}
 
 	int BestMove()
 	{
-		return m_children.begin()->first;
+		return m_currentBestChild.first;
 	}
 
 	void AddParent(UCTNode* parent)
@@ -93,6 +106,21 @@ public:
 		m_legalMoves.remove(move);
 		m_children[move] = child;
 		cout << child->m_board.ToString() << endl;
+	}
+
+	double GetUCT(uint64_t& pN, double c)
+	{
+		return m_Q/m_N + c * sqrt(2*log(pN)/m_N);
+	}
+
+	TBoard& GetBoard()
+	{
+		return m_board;
+	}
+
+	int GetColor()
+	{
+		return m_color;
 	}
 
 private:

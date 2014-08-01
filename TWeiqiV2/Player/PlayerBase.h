@@ -14,6 +14,11 @@ public:
 
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2) = 0;
 
+	virtual TBoard& GetBoard()
+	{
+		return m_currentPosition;
+	}
+
 protected:
 
 	TBoard m_currentPosition;

@@ -28,7 +28,8 @@ private:
 public:
 	Game()
 	{
-		m_computerPlayer = new PlayerRandom<TBoard>(m_currentPosition, BLACK);
+		//m_computerPlayer = new PlayerRandom<TBoard>(m_currentPosition, BLACK);
+		m_computerPlayer = new PlayerUCT<TBoard>(m_currentPosition, BLACK);
 	}
 
 	~Game()

@@ -4,6 +4,7 @@
 #include <map>
 
 #include "PlayerBase.h"
+#include "PlayerRandom.h"
 #include "UCTNode.h"
 
 template <typename TBoard>
@@ -62,6 +63,27 @@ public:
 			}
 		}
 		return front;
+	}
+
+	virtual double DefaultPolicy(TNode* node)
+	{
+		int color = node->GetColor();
+		PlayerRandom<TBoard> randPlayer(node->GetBoard(), color);
+		TBoard m_KOCheck[2];
+		int move = randPlayer.Play(color, m_KOCheck);
+		while (move >= 0)
+		{
+			m_KOCheck[color] = randPlayer.GetBoard();
+			color = 1 - color;
+			move = randPlayer.Play(color, m_KOCheck);
+		}
+		if (randPlayer.GetBoard().FinalCheckBlack())
+		{
+			return 1;
+		}else
+		{
+			return 0;
+		}
 	}
 
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
