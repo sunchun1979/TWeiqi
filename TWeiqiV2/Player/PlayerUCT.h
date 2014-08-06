@@ -2,6 +2,9 @@
 
 #include <unordered_map>
 #include <map>
+#include <set>
+#include <queue>
+#include <ctime>
 
 #include "PlayerBase.h"
 #include "PlayerRandom.h"
@@ -16,6 +19,8 @@ private:
 	map<TVKey, UCTNode<TBoard>*> m_boardDict;
 
 	UCTNode<TBoard>* m_root;
+
+	clock_t m_beginTime;
 
 public:
 	PlayerUCT(TBoard board, int color) : PlayerBase<TBoard>(board, color)
@@ -87,47 +92,71 @@ public:
 			return 1;
 		}else
 		{
-			return 0;
+			return -1;
 		}
 	}
 
 	virtual void Backup(TNode* leafNode, double delta)
 	{
+		queue<TNode*> nodeToUpdate;
+		set<TNode*> nodeSet;
+		nodeToUpdate.push(leafNode);
+		nodeSet.insert(leafNode);
+		while (nodeToUpdate.size() > 0)
+		{
+			queue<TNode*> currentLevel;
+			while (nodeToUpdate.size() > 0)
+			{
+				TNode* current = nodeToUpdate.front();
+				nodeToUpdate.pop();
+				current->m_N ++;
+				current->m_Q += delta;
+				currentLevel.push(current);
+			}
+			delta = -delta;
 
+			while(currentLevel.size() > 0)
+			{
+				TNode* current = currentLevel.front();
+				list<TNode*> currentParents = current->GetParents();
+				for each (auto singleParent in currentParents)
+				{
+					if (nodeSet.find(singleParent) == nodeSet.end())
+					{
+						nodeSet.insert(singleParent);
+						nodeToUpdate.push(singleParent);
+					}
+				}
+				currentLevel.pop();
+				nodeSet.erase(current);
+			}
+		}
+	}
+
+	virtual bool HasResource()
+	{
+		clock_t now = clock();
+		//if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 10)
+		//{
+		//	return false;
+		//}
+		cout << m_root->m_N << endl;
+		if (m_root->m_N > 1000)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
 	{
-		TNode* candidateNode = TreePolicy(m_root);
-		double delta = DefaultPolicy(candidateNode);
-		Backup(candidateNode, delta);
-		//// Random play
-		//int candidates = m_currentPosition.GetNumLegalPositions(color);
-		//int move = m_currentPosition.GetLegalMoveByIndex(color, rand() % candidates);
-		//bool gameEnd = false;
-		//while (!m_currentPosition.Move(move, color, &KOCheck[color]))
-		//{
-		//	if (candidates == 1)
-		//	{
-		//		gameEnd = true;
-		//		break;
-		//	}
-		//	m_currentPosition.MarkMoveIllegal(color, move);
-		//	if (gameEnd = m_currentPosition.EndGameCheck())
-		//	{
-		//		break;
-		//	}else
-		//	{
-		//		candidates = m_currentPosition.GetNumLegalPositions(color);
-		//		move = m_currentPosition.GetLegalMoveByIndex(color, rand() % candidates);
-		//	}
-		//}
-		//if (!gameEnd)
-		//{
-		//	return move;
-		//}else
-		//{
-		//	return -1;
-		//}
+		m_beginTime = clock();
+		while(HasResource())
+		{
+			TNode* candidateNode = TreePolicy(m_root);
+			double delta = DefaultPolicy(candidateNode);
+			Backup(candidateNode, delta);
+		}
+		return m_root->BestMove();
 	}
 };

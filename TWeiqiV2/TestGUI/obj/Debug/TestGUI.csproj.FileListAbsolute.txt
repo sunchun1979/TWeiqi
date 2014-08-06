@@ -6,4 +6,3 @@ C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Debug\TestGUI.Prop
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Debug\TestGUI.csproj.GenerateResource.Cache
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Debug\TestGUI.exe
 C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Debug\TestGUI.pdb
-C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\TestGUI\obj\Debug\TestGUI.csprojResolveAssemblyReference.cache

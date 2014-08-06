@@ -94,6 +94,7 @@ public:
 
 	int BestMove()
 	{
+		BestChild();
 		return m_currentBestChild.first;
 	}
 
@@ -106,7 +107,11 @@ public:
 	{
 		m_legalMoves.remove(move);
 		m_children[move] = child;
-		cout << child->m_board.ToString() << endl;
+	}
+
+	list<UCTNode*> GetParents()
+	{
+		return m_parents;
 	}
 
 	double GetUCT(uint64_t& pN, double c)
