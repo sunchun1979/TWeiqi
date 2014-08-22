@@ -105,6 +105,7 @@ public:
 		{
 			m_KOCheck[color] = m_currentPosition;
 			m_history.push_back(m_currentPosition);
+			m_computerPlayer->Update(move, color);
 			return true;
 		}
 		return false;

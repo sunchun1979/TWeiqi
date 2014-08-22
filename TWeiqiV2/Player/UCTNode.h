@@ -22,6 +22,8 @@ private:
 	map<int, UCTNode*> m_children;
 	pair<int, UCTNode*> m_currentBestChild;
 
+public:
+
 	list<int> m_legalMoves;
 
 public:
@@ -36,13 +38,24 @@ public:
 	{
 	}
 
+	void Reset(TBoard& b)
+	{
+		m_board.Clone(b);
+		Reset();
+	}
+
 	void Reset()
 	{
 		m_board.AssignRawVector(m_key);
 		int n = m_board.GetNumLegalPositions(m_color);
+		m_legalMoves.clear();
+		//cout << m_board.ToString() << endl;
+		//cout << "mcolor n " << m_color << " " << n << endl;
 		for (int i = 0; i < n; i++)
 		{
-			m_legalMoves.push_back(m_board.GetLegalMoveByIndex(m_color, i));
+			int p = m_board.GetLegalMoveByIndex(m_color, i);
+			//cout << "push back p = " << p << endl;
+			m_legalMoves.push_back(p);
 		}
 	}
 
@@ -67,7 +80,7 @@ public:
 		{
 			move = m_legalMoves.front();
 			UCTNode* ret = new UCTNode(m_board, 1-m_color);
-			ret->m_board.Move(move, m_color);
+			ret->m_board.Move(move, 1-m_color);
 			ret->Reset();
 			ret->m_parents.push_back(this);
 			return ret;
@@ -79,7 +92,7 @@ public:
 
 	UCTNode* BestChild()
 	{
-		double bestUCT = std::numeric_limits<double>::min();
+		double bestUCT = -std::numeric_limits<double>::max();
 		for (auto child : m_children)
 		{
 			double cUCT = GetUCT(m_N, 0.717);

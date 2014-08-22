@@ -132,8 +132,14 @@ void ManualGame9()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(0);
+	BitBoard<BitArray64, 9> board;
+	board.Move(20, 0);
+	int n = board.GetNumLegalPositions(0);
+	cout << n << endl;
+	n = board.GetNumLegalPositions(1);
+	cout << n << endl;
 	//PerformanceTest();
-	GameDriver<9>(true, 4);
+	//GameDriver<9>(true, 4);
 	return 0;
 }
 

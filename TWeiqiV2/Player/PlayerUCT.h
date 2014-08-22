@@ -26,7 +26,7 @@ public:
 	PlayerUCT(TBoard board, int color) : PlayerBase<TBoard>(board, color)
 	{
 		m_root = new TNode(m_currentPosition, color);
-		m_root->Reset();
+		m_root->Reset(m_currentPosition);
 		m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
 	}
 
@@ -36,6 +36,14 @@ public:
 		{
 			delete node.second;
 		}
+	}
+
+	virtual bool Update(int move, int color)
+	{
+		bool ret = m_currentPosition.Move(move, color);
+		m_root->Reset(m_currentPosition);
+		m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
+		return ret;
 	}
 
 	virtual TNode* TreePolicy(TNode* node)
@@ -50,6 +58,9 @@ public:
 				TVKey candidateKey;
 
 				candidate = front->Expand(candidateMove);
+				//cout << "candidateMove = " << candidateMove << endl;
+				cout << "Expanded with legal moves " << candidate->m_legalMoves.size() << endl;
+				cout << candidate->GetBoard().ToString() << endl;
 				candidateKey = candidate->GetKey();
 				if (m_boardDict.find(candidateKey) == m_boardDict.end())
 				{
@@ -64,7 +75,13 @@ public:
 				}
 			}else
 			{
+				TNode* save = front;
 				front = front->BestChild();
+				if (front == save)
+				{
+					cout << "Error Here" << endl;
+					getchar();
+				}
 			}
 		}
 		return front;
@@ -140,7 +157,7 @@ public:
 		//{
 		//	return false;
 		//}
-		cout << m_root->m_N << endl;
+		cout << m_root->m_N << " " << m_root->m_Q << endl;
 		if (m_root->m_N > 1000)
 		{
 			return false;
@@ -151,11 +168,15 @@ public:
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
 	{
 		m_beginTime = clock();
+		cout << m_root->GetBoard().ToString() << endl;
 		while(HasResource())
 		{
 			TNode* candidateNode = TreePolicy(m_root);
 			double delta = DefaultPolicy(candidateNode);
 			Backup(candidateNode, delta);
+
+			cout << candidateNode->GetBoard().ToString() << endl;
+			//getchar();
 		}
 		return m_root->BestMove();
 	}
