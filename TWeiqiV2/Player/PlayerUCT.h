@@ -21,6 +21,7 @@ private:
 	UCTNode<TBoard>* m_root;
 
 	clock_t m_beginTime;
+	uint64_t m_beginRootN;
 
 public:
 	PlayerUCT(TBoard board, int color) : PlayerBase<TBoard>(board, color)
@@ -59,8 +60,8 @@ public:
 
 				candidate = front->Expand(candidateMove);
 				//cout << "candidateMove = " << candidateMove << endl;
-				cout << "Expanded with legal moves " << candidate->m_legalMoves.size() << endl;
-				cout << candidate->GetBoard().ToString() << endl;
+				//cout << "Expanded with legal moves " << candidate->m_legalMoves.size() << endl;
+				//cout << candidate->GetBoard().ToString() << endl;
 				candidateKey = candidate->GetKey();
 				if (m_boardDict.find(candidateKey) == m_boardDict.end())
 				{
@@ -77,11 +78,6 @@ public:
 			{
 				TNode* save = front;
 				front = front->BestChild();
-				if (front == save)
-				{
-					cout << "Error Here" << endl;
-					getchar();
-				}
 			}
 		}
 		return front;
@@ -157,27 +153,34 @@ public:
 		//{
 		//	return false;
 		//}
-		cout << m_root->m_N << " " << m_root->m_Q << endl;
-		if (m_root->m_N > 1000)
+		//cout << m_root->m_N << " " << m_root->m_Q << endl;
+		if (m_root->m_N - m_beginRootN > 500)
 		{
 			return false;
 		}
 		return true;
 	}
 
+	virtual void InitializeResource()
+	{
+		m_beginRootN = m_root->m_N;
+	}
+
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
 	{
 		m_beginTime = clock();
 		cout << m_root->GetBoard().ToString() << endl;
+		InitializeResource();
 		while(HasResource())
 		{
 			TNode* candidateNode = TreePolicy(m_root);
 			double delta = DefaultPolicy(candidateNode);
 			Backup(candidateNode, delta);
 
-			cout << candidateNode->GetBoard().ToString() << endl;
+			//cout << candidateNode->GetBoard().ToString() << endl;
 			//getchar();
 		}
+		cout << " best move = " << m_root->BestMove() << endl;
 		return m_root->BestMove();
 	}
 };

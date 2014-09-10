@@ -22,6 +22,7 @@ static string ToLower(const string& tmp)
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Game<9> game;
+	srand(0);
 	string commandEx = "";
 	while (commandEx != "exit")
 	{
@@ -37,6 +38,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (game.PlayFromCurrent(stoi(args[0]), stoi(args[1])))
 			{
 				game.ComputerPlay(1-stoi(args[1]));
+				cout << game.GetCurrentBoard().ToString() << endl;
 			}
 			//cout << "done" << endl;
 			auto currentB = game.GetCurrentStones(0);

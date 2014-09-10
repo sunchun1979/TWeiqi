@@ -71,7 +71,7 @@ public:
 
 	bool EndGameCheck()
 	{
-		return false;
+		return m_board.EndGameCheck();
 	}
 
 	UCTNode* Expand(int& move)
@@ -95,7 +95,7 @@ public:
 		double bestUCT = -std::numeric_limits<double>::max();
 		for (auto child : m_children)
 		{
-			double cUCT = GetUCT(m_N, 0.717);
+			double cUCT = child.second->GetUCT(m_N, 0.717);
 			if (cUCT > bestUCT)
 			{
 				bestUCT = cUCT;
@@ -119,7 +119,10 @@ public:
 	void AddChild(int move, UCTNode* child)
 	{
 		m_legalMoves.remove(move);
-		m_children[move] = child;
+		if (this != child)
+		{
+			m_children[move] = child;
+		}
 	}
 
 	list<UCTNode*> GetParents()
