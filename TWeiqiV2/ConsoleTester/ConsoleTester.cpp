@@ -132,14 +132,16 @@ void ManualGame9()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(0);
-	BitBoard<BitArray64, 9> board;
-	board.Move(20, 0);
-	int n = board.GetNumLegalPositions(0);
-	cout << n << endl;
-	n = board.GetNumLegalPositions(1);
-	cout << n << endl;
-	//PerformanceTest();
-	//GameDriver<9>(true, 4);
+	Game<4> game;
+	int gameSequence[] = {5, 10, 7};
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "play " << gameSequence[i] << endl;
+		game.PlayFromCurrent(gameSequence[i], 0);
+		cout << game.GetCurrentBoard().ToString() << endl;
+		game.ComputerPlay(1);
+		cout << game.GetCurrentBoard().ToString() << endl;
+	}
 	return 0;
 }
 

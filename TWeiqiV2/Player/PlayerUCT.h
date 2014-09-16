@@ -23,9 +23,12 @@ private:
 	clock_t m_beginTime;
 	uint64_t m_beginRootN;
 
+	int m_defaultPolicyN;
+
 public:
 	PlayerUCT(TBoard board, int color) : PlayerBase<TBoard>(board, color)
 	{
+		m_defaultPolicyN = 1000;
 		m_root = new TNode(m_currentPosition, color);
 		m_root->Reset(m_currentPosition);
 		m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
@@ -85,7 +88,12 @@ public:
 
 	virtual double DefaultPolicy(TNode* node)
 	{
-		return PlayOut(node);
+		int delta = 0;
+		for (int i = 0; i < m_defaultPolicyN; i++)
+		{
+			delta += PlayOut(node);
+		}
+		return (double)delta/m_defaultPolicyN;
 	}
 
 	static int PlayOut(TNode* node)
@@ -154,7 +162,7 @@ public:
 		//	return false;
 		//}
 		//cout << m_root->m_N << " " << m_root->m_Q << endl;
-		if (m_root->m_N - m_beginRootN > 500)
+		if (m_root->m_N - m_beginRootN > 50)
 		{
 			return false;
 		}
@@ -169,7 +177,7 @@ public:
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
 	{
 		m_beginTime = clock();
-		cout << m_root->GetBoard().ToString() << endl;
+		//cout << m_root->GetBoard().ToString() << endl;
 		InitializeResource();
 		while(HasResource())
 		{
