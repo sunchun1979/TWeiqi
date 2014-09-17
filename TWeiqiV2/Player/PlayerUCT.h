@@ -28,7 +28,7 @@ private:
 public:
 	PlayerUCT(TBoard board, int color) : PlayerBase<TBoard>(board, color)
 	{
-		m_defaultPolicyN = 500;
+		m_defaultPolicyN = 10;
 		m_root = new TNode(m_currentPosition, color);
 		m_root->Reset(m_currentPosition);
 		m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
@@ -92,6 +92,17 @@ public:
 			{
 				TNode* save = front;
 				front = front->BestChild();
+				if (front == save)
+				{
+					// ko situation in tree building
+					cout << front->GetBoard().ToString() << endl;
+					getchar();
+				}
+				if (front == nullptr)
+				{
+					save->MarkStop();
+					front = save;
+				}
 			}
 		}
 		return front;
@@ -113,11 +124,13 @@ public:
 		PlayerRandom<TBoard> randPlayer(node->GetBoard(), color);
 		TBoard m_KOCheck[2];
 		int move = randPlayer.Play(color, m_KOCheck);
-		while (move >= 0)
+		int count = 0;
+		while ( (move >= 0) && (count < 1000) )
 		{
 			m_KOCheck[color] = randPlayer.GetBoard();
 			color = 1 - color;
 			move = randPlayer.Play(color, m_KOCheck);
+			count++;
 		}
 		if (randPlayer.GetBoard().FinalCheckBlack())
 		{
@@ -168,7 +181,7 @@ public:
 	virtual bool HasResource()
 	{
 		clock_t now = clock();
-		if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 5)
+		if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 30)
 		{
 			cout << " expanded " << m_root->m_N - m_beginRootN << " nodes" << endl;
 			return false;

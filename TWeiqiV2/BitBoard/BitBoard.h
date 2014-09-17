@@ -273,6 +273,13 @@ public:
 		return ! (m_legal[0]->Intersects(*m_legal[1]));
 	}
 
+	bool EndGameCheck2()
+	{
+		cout << "0: " << m_legal[0]->ToPositionString() << endl;
+		cout << "1: " << m_legal[1]->ToPositionString() << endl;
+		return ! (m_legal[0]->Intersects(*m_legal[1]));
+	}
+
 	const TBitArray<N> GetRawStones(int color)
 	{
 		return *m_stones[color];

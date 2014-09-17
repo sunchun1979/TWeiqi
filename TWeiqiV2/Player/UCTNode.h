@@ -22,6 +22,7 @@ private:
 	list<UCTNode*> m_parents;
 	map<int, UCTNode*> m_children;
 	pair<int, UCTNode*> m_currentBestChild;
+	bool m_stopSign;
 
 public:
 
@@ -31,7 +32,7 @@ public:
 	uint64_t m_N;
 	double m_Q;
 
-	UCTNode(TBoard b, int c) : m_move(-1), m_board(b), m_color(c), m_N(0), m_Q(0)
+	UCTNode(TBoard b, int c) : m_move(-1), m_board(b), m_color(c), m_N(0), m_Q(0), m_stopSign(false)
 	{
 	}
 
@@ -72,7 +73,7 @@ public:
 
 	bool EndGameCheck()
 	{
-		return m_board.EndGameCheck();
+		return m_board.EndGameCheck() || m_stopSign;
 	}
 
 	UCTNode* Expand(int& move)
@@ -108,18 +109,21 @@ public:
 		//if (m_currentBestChild.second == nullptr)
 		//{
 		//	cout << "Hehe" << endl;
-		//	double bestUCT1 = sign * std::numeric_limits<double>::max();
-		//	for (auto child1 : m_children)
-		//	{
-		//		double cUCT1 = child1.second->GetUCT(m_N, 0.717);
-		//		cout << cUCT1 << endl;
-		//		if (sign * cUCT1 > sign * bestUCT1)
-		//		{
-		//			cout << "shoudl hit once" << endl;
-		//			bestUCT = cUCT1;
-		//			m_currentBestChild = child1;
-		//		}
-		//	}
+		//	cout << "color " << m_color << endl;
+		//	cout << m_board.ToString() << endl;
+		//	cout << m_board.EndGameCheck2() << endl;
+		//	//double bestUCT1 = sign * std::numeric_limits<double>::max();
+		//	//for (auto child1 : m_children)
+		//	//{
+		//	//	double cUCT1 = child1.second->GetUCT(m_N, 0.717);
+		//	//	cout << cUCT1 << endl;
+		//	//	if (sign * cUCT1 > sign * bestUCT1)
+		//	//	{
+		//	//		cout << "shoudl hit once" << endl;
+		//	//		bestUCT = cUCT1;
+		//	//		m_currentBestChild = child1;
+		//	//	}
+		//	//}
 		//	getchar();
 		//}
 		return m_currentBestChild.second;
@@ -176,6 +180,11 @@ public:
 	int GetColor()
 	{
 		return m_color;
+	}
+
+	void MarkStop()
+	{
+		m_stopSign = true;
 	}
 
 private:
