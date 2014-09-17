@@ -16,6 +16,7 @@ class UCTNode
 private:
 	TBoard m_board;
 	int m_color;
+	int m_move;
 
 	TVKey m_key;
 	list<UCTNode*> m_parents;
@@ -30,7 +31,7 @@ public:
 	uint64_t m_N;
 	double m_Q;
 
-	UCTNode(TBoard b, int c) : m_board(b), m_color(c), m_N(0), m_Q(0)
+	UCTNode(TBoard b, int c) : m_move(-1), m_board(b), m_color(c), m_N(0), m_Q(0)
 	{
 	}
 
@@ -80,6 +81,7 @@ public:
 		{
 			move = m_legalMoves.front();
 			UCTNode* ret = new UCTNode(m_board, 1-m_color);
+			ret->m_move = move;
 			ret->m_board.Move(move, 1-m_color);
 			ret->Reset();
 			ret->m_parents.push_back(this);
@@ -130,6 +132,14 @@ public:
 		return m_parents;
 	}
 
+	void PrintChildren()
+	{
+		for (auto child : m_children)
+		{
+			cout << "child " << child.first << endl;
+		}
+	}
+
 	double GetUCT(uint64_t& pN, double c)
 	{
 		return m_Q/m_N + c * sqrt(2*log(pN)/m_N);
@@ -138,6 +148,11 @@ public:
 	TBoard& GetBoard()
 	{
 		return m_board;
+	}
+
+	int GetMove()
+	{
+		return m_move;
 	}
 
 	int GetColor()

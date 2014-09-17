@@ -1,4 +1,4 @@
-﻿Build started 8/25/2014 3:48:15 PM.
+﻿Build started 9/16/2014 7:23:14 PM.
      1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\Game\Game.vcxproj" on node 2 (Build target(s)).
      1>Link:
          Game.vcxproj -> C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\x64\Release\Game.dll
@@ -6,4 +6,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.07
+Time Elapsed 00:00:00.05

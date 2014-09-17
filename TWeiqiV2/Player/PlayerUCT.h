@@ -28,7 +28,7 @@ private:
 public:
 	PlayerUCT(TBoard board, int color) : PlayerBase<TBoard>(board, color)
 	{
-		m_defaultPolicyN = 1000;
+		m_defaultPolicyN = 500;
 		m_root = new TNode(m_currentPosition, color);
 		m_root->Reset(m_currentPosition);
 		m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
@@ -45,8 +45,17 @@ public:
 	virtual bool Update(int move, int color)
 	{
 		bool ret = m_currentPosition.Move(move, color);
-		m_root->Reset(m_currentPosition);
-		m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
+		TVKey key;
+		m_currentPosition.AssignRawVector(key);
+		if (m_boardDict.find(key) != m_boardDict.end())
+		{
+			m_root = m_boardDict[key];
+		}else
+		{
+			m_root = new TNode(m_currentPosition, color);
+			m_root->Reset(m_currentPosition);
+			m_boardDict.insert(std::pair<TVKey, TNode*>(m_root->GetKey(), m_root));
+		}
 		return ret;
 	}
 
@@ -69,11 +78,13 @@ public:
 				if (m_boardDict.find(candidateKey) == m_boardDict.end())
 				{
 					m_boardDict[candidateKey] = candidate;
+					//cout << "New move " << candidateMove << endl;
 					front->AddChild(candidateMove, candidate);
 					return candidate;
 				}else
 				{
 					delete candidate;
+					//cout << "old move " << candidateMove << endl;
 					front->AddChild(candidateMove, m_boardDict[candidateKey]);
 					return m_boardDict[candidateKey];
 				}
@@ -157,15 +168,16 @@ public:
 	virtual bool HasResource()
 	{
 		clock_t now = clock();
-		//if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 10)
+		if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 20)
+		{
+			cout << " expanded " << m_root->m_N - m_beginRootN << " nodes" << endl;
+			return false;
+		}
+		//cout << m_root->m_N << " " << m_root->m_Q << endl;
+		//if (m_root->m_N - m_beginRootN > 200)
 		//{
 		//	return false;
 		//}
-		//cout << m_root->m_N << " " << m_root->m_Q << endl;
-		if (m_root->m_N - m_beginRootN > 50)
-		{
-			return false;
-		}
 		return true;
 	}
 
@@ -179,6 +191,8 @@ public:
 		m_beginTime = clock();
 		//cout << m_root->GetBoard().ToString() << endl;
 		InitializeResource();
+		//cout << " root board 1 " << m_root->GetBoard().ToString() << endl;
+		//m_root->PrintChildren();
 		while(HasResource())
 		{
 			TNode* candidateNode = TreePolicy(m_root);
@@ -188,6 +202,8 @@ public:
 			//cout << candidateNode->GetBoard().ToString() << endl;
 			//getchar();
 		}
+		//cout << " root board " << m_root->GetBoard().ToString() << endl;
+		//m_root->PrintChildren();
 		cout << " best move = " << m_root->BestMove() << endl;
 		return m_root->BestMove();
 	}
