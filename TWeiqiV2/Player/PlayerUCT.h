@@ -168,13 +168,13 @@ public:
 	virtual bool HasResource()
 	{
 		clock_t now = clock();
-		if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 20)
+		if ( double(now - m_beginTime) / CLOCKS_PER_SEC > 5)
 		{
 			cout << " expanded " << m_root->m_N - m_beginRootN << " nodes" << endl;
 			return false;
 		}
 		//cout << m_root->m_N << " " << m_root->m_Q << endl;
-		//if (m_root->m_N - m_beginRootN > 200)
+		//if (m_root->m_N - m_beginRootN > 1000)
 		//{
 		//	return false;
 		//}
@@ -189,7 +189,7 @@ public:
 	virtual int Play(int color, const TBoard* KOCheck, int KOLength = 2)
 	{
 		m_beginTime = clock();
-		//cout << m_root->GetBoard().ToString() << endl;
+		cout << m_root->GetBoard().ToString() << endl;
 		InitializeResource();
 		//cout << " root board 1 " << m_root->GetBoard().ToString() << endl;
 		//m_root->PrintChildren();

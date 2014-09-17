@@ -94,16 +94,34 @@ public:
 
 	UCTNode* BestChild()
 	{
-		double bestUCT = -std::numeric_limits<double>::max();
+		double sign = m_color * 2 - 1;
+		double bestUCT = sign * std::numeric_limits<double>::max();
 		for (auto child : m_children)
 		{
 			double cUCT = child.second->GetUCT(m_N, 0.717);
-			if (cUCT > bestUCT)
+			if (sign * cUCT < sign * bestUCT)
 			{
 				bestUCT = cUCT;
 				m_currentBestChild = child;
 			}
 		}
+		//if (m_currentBestChild.second == nullptr)
+		//{
+		//	cout << "Hehe" << endl;
+		//	double bestUCT1 = sign * std::numeric_limits<double>::max();
+		//	for (auto child1 : m_children)
+		//	{
+		//		double cUCT1 = child1.second->GetUCT(m_N, 0.717);
+		//		cout << cUCT1 << endl;
+		//		if (sign * cUCT1 > sign * bestUCT1)
+		//		{
+		//			cout << "shoudl hit once" << endl;
+		//			bestUCT = cUCT1;
+		//			m_currentBestChild = child1;
+		//		}
+		//	}
+		//	getchar();
+		//}
 		return m_currentBestChild.second;
 	}
 

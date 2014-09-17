@@ -95,6 +95,7 @@ public:
 		for (int c = 0; c < 2; c++)
 		{
 			*m_stones[c] = *other.m_stones[c];
+			//m_legal[c] = new TBitArray<N>(*other.m_legal[c]);
 		}
 		//*m_emptyStones = *other.m_emptyStones;
 		return *this;

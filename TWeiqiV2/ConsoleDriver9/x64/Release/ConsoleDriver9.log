@@ -1,5 +1,5 @@
-﻿Build started 9/16/2014 10:36:05 PM.
-     1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\ConsoleDriver9\ConsoleDriver9.vcxproj" on node 2 (Build target(s)).
+﻿Build started 9/17/2014 12:54:37 PM.
+     1>Project "C:\Users\chunsun\Documents\GitHub\TWeiqi\TWeiqiV2\ConsoleDriver9\ConsoleDriver9.vcxproj" on node 4 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /I..\Game /I..\BitBoard /I..\Player /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt ConsoleDriver9.cpp
          ConsoleDriver9.cpp
@@ -13,4 +13,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.47
+Time Elapsed 00:00:04.18

@@ -21,7 +21,7 @@ static string ToLower(const string& tmp)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Game<4> game;
+	Game<9> game;
 	srand(0);
 	string commandEx = "";
 	while (commandEx != "exit")
